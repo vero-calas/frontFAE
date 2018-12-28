@@ -86,41 +86,41 @@
                                 </md-card-content>
                             </md-card>
                         </div>
-                    <div>
-                        <md-card>
-                            <md-card-header>
-                                <div class="md-title"> ¿Quiénes somos? </div>
-                            </md-card-header>
-                            <md-card-content>
-                                e-ematur es un servicio de medición online de percepciones pionero en el área del marketing turístico.  Es un servicio innovador que permite la detección temprana, prevención, diagnóstico y tratamiento de un débil posicionamiento de imagen logrado por un destino turístico.
-                            </md-card-content>
-                        </md-card>
-                    </div>
+                        <div>
+                            <md-card>
+                                <md-card-header>
+                                    <div class="md-title"> ¿Quiénes somos? </div>
+                                </md-card-header>
+                                <md-card-content>
+                                    e-ematur es un servicio de medición online de percepciones pionero en el área del marketing turístico.  Es un servicio innovador que permite la detección temprana, prevención, diagnóstico y tratamiento de un débil posicionamiento de imagen logrado por un destino turístico.
+                                </md-card-content>
+                            </md-card>
+                        </div>
 
                     </div>
                 </div>
             </md-tab>
 
             <md-tab id="tab-pages" md-label="¿Quiénes Somos?" to="/components/tabs/pages">
-            <div>
-                <md-card-content style="float: left; width: 50%">
-                    <img  class="img-responsive" src="https://d1ljaggyrdca1l.cloudfront.net/wp-content/uploads/2017/04/Guanaco-in-Torres-del-Paine-National-Park-Chile-1600x900.jpg">
-                </md-card-content>
-
                 <div>
-                    <md-card class="card">
-                        <md-card-header>
-                            <div class="md-title">Sobre la empresa: </div>
-                        </md-card-header>
-                    <md-card-content>
-                    <label>e-ematur pretende ser el proveedor líder a nivel mundial de soluciones tecnológicas de marketing para mejorar la percepción de los destinos turísticos. A través de un modelo de suscripción predecible y asequible, nuestros clientes podrán adquirir y aplicar las mejores estrategias de marketing para posicionar, consolidar y/o recordar la imagen de un destino turístico a nivel internacional, nacional o local. Servicios tecnológicos que serán complementados con asesorías y capacitaciones especializadas dictadas por expertos, en el tratamiento de la imagen de los destinos turísticos.</label>
-                     </md-card-content>
-                    </md-card>
+                    <md-card-content style="float: left; width: 50%">
+                        <img  class="img-responsive" src="https://d1ljaggyrdca1l.cloudfront.net/wp-content/uploads/2017/04/Guanaco-in-Torres-del-Paine-National-Park-Chile-1600x900.jpg">
+                    </md-card-content>
+
+                    <div>
+                        <md-card class="card">
+                            <md-card-header>
+                                <div class="md-title">Sobre la empresa: </div>
+                            </md-card-header>
+                            <md-card-content>
+                                <label>e-ematur pretende ser el proveedor líder a nivel mundial de soluciones tecnológicas de marketing para mejorar la percepción de los destinos turísticos. A través de un modelo de suscripción predecible y asequible, nuestros clientes podrán adquirir y aplicar las mejores estrategias de marketing para posicionar, consolidar y/o recordar la imagen de un destino turístico a nivel internacional, nacional o local. Servicios tecnológicos que serán complementados con asesorías y capacitaciones especializadas dictadas por expertos, en el tratamiento de la imagen de los destinos turísticos.</label>
+                            </md-card-content>
+                        </md-card>
+                    </div>
                 </div>
-            </div>
 
 
-             </md-tab>
+            </md-tab>
 
             <md-tab id="tab-posts" md-label="Contacto" to="/components/tabs/posts">
 
@@ -177,7 +177,7 @@
                                 <h1>{{datos[i].nombre}}</h1><br>
                                 <label>{{datos[i].descripcion}}</label>
                                 <br><label> Por favor, responda según su opinión</label>
-                               <hr>
+                                <hr>
                                 <div v-model="array2" v-if="j!==20" :key="j" :value="j" v-for="(preguntas,j) in categoria.preguntas">
                                     <hr>
                                     <label> {{ preguntas.pregunta }} </label>
@@ -286,33 +286,25 @@
             array:[],
             array2:null,
             cantidadCategoria: null
-
         }),
-
         created() {
-
         },
         mounted(){
             this.cantidad();
         },
-
         methods:{
             cantidad(){
                 console.log("la data que llega es", this.datos);
-             this.cantidadCategoria = (this._props.datos).length;
-
-            for (let i=0; i<this.cantidadCategoria; i++){
-                let json ={
-                    respuesta: []
+                this.cantidadCategoria = (this._props.datos).length;
+                for (let i=0; i<this.cantidadCategoria; i++){
+                    let json ={
+                        respuesta: []
+                    }
+                    this.form2.push(json)
                 }
-                this.form2.push(json)
             }
-            }
-
-
         }
     }
-
 </script>
 
 

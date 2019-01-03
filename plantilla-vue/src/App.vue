@@ -163,6 +163,15 @@
             const auth = {
                 headers: {'Authorization':'Bearer ' + localStorage.getItem('authtoken')}
             }
+            this.$http.get('http://localhost:8092/categories/all',auth).then(response => {
+                this.preguntas = response.data;
+                console.log('data de regiones obtenido es:', this.preguntas);
+                this.eleccion = 1;
+                this.load += 33
+            }, (response) => {
+                this.error = true;
+                console.log('no obtiene regiones');
+            });
 
             this.$http.get('http://localhost:8092/regiones/all',auth).then(response => {
                 this.regiones = response.data;

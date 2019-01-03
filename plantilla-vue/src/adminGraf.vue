@@ -8,7 +8,7 @@
 
             <md-tab id="tab-filter" md-label="Filtrar Gráfico" to="/components/tabs/filterGraf">
 
-                <div style="float: left">
+                <div style="float: left; width: 50%">
                 <md-card>
                     <div>
 
@@ -112,7 +112,7 @@
                         </div>
 
                     <div>
-                        <md-datepicker :format="" v-model="selectedInitial">
+                        <md-datepicker v-model="selectedInitial">
                             <label>Seleccione fecha inicial</label>
                         </md-datepicker>
                     </div>
@@ -127,13 +127,13 @@
 
                 </md-card>
 
-               <button v-on:click="llamarServicio">Click me</button>
+               <button @change="llamarServicio">Click me</button>
                 </div>
 
-                <div style="float: right">
-                <md-card v-if="this.mostrar" style="width: 97%; float: left">
+                <div style="float: right; width: 50%">
+                <md-card style="width: 97%; float: left">
                     <md-card-header>
-                        <div class="md-title">Categorías por fecha:</div>
+                        <div class="md-title">Gráfico:</div>
                     </md-card-header>
                     <md-card-media>
                         <div v-if="this.showd">
@@ -178,10 +178,35 @@
         }),
 
         created() {
-
+            this.graficoInicial();
+            //this.crearGrafico();
         },
 
         methods: {
+
+            graficoInicial(){
+                const auth = {
+                    headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiJDJhJDEwJGtsblN6Tm9oNHF5M1RQOS9scXhCN3VpdmdQeG9XTVZNZ2F0eVIwb0taVC4vRnl2Qi42S0RLIiwicm9sIjoxLCJjb3JyZW8iOiJhZG1pbkBtYWlsLmNsIiwiYWN0aXZvIjp0cnVlfQ.g78PzR0At1xVkHqXYPIVJmHWmF8YHmtQu6nXG8AoEnU'}
+                };
+                let json = {
+                    "categoria_id": 2,
+                    "tipoEncuesta": 1,
+                    "region_id": 1,
+                    "fechaInicial": "2018-08-27T23:59:59.000+0000",
+                    "fechaFinal": "2018-09-01T00:00:00.000+0000"
+                };
+
+                //servicio de envio del json
+                console.log("el json que quiero enviar es:", json);
+                this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json), auth).then(response => {
+                   console.log("entre")
+                    this.dataGr = response.data;
+                    console.log('data de grafico obtenido es:', this.dataGr);
+                }, (response) => {
+                    console.log('no obtiene data grafico');
+                    this.error = true;
+                });
+            },
 
             cambiarMes(mes){
 
@@ -258,7 +283,8 @@
                     labels: ["Aprobados", "Desaprobados", "Neutro"],
                     datasets: [
                         {
-                            data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
+                            //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
+                            data: [20, 120, 30],
                             label: ["Puntuación alcanzada"],
                             backgroundColor: ['#D4E157','#D4E157','#D4E157','#D4E157','#D4E157',
                                 '#D4E157','#D4E157','#D4E157','#D4E157','#D4E157','#D4E157','#D4E157','#D4E157','#D4E157',

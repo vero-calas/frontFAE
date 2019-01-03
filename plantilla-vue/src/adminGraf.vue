@@ -2,9 +2,16 @@
 
     <div>
         <md-tabs md-sync-route class="md-transparent" md-alignment="fixed">
-            <md-tab id="tab-home" md-label="Resumen" to="/components/tabs/home">
+           <md-tab id="tab-general" md-label="General" to="/components/tabs/generalGraf">
+
+           </md-tab>
+
+            <md-tab id="tab-filter" md-label="Filtrar Gráfico" to="/components/tabs/filterGraf">
+
+                <div style="float: left">
                 <md-card>
-<div>
+                    <div>
+
                     <div>
 
                         <div>
@@ -105,7 +112,7 @@
                         </div>
 
                     <div>
-                        <md-datepicker v-model="selectedInitial">
+                        <md-datepicker :format="" v-model="selectedInitial">
                             <label>Seleccione fecha inicial</label>
                         </md-datepicker>
                     </div>
@@ -119,9 +126,11 @@
                     </div>
 
                 </md-card>
-                
-           <!--     <button @change="llamarServicio">Click me</button> -->
 
+               <button v-on:click="llamarServicio">Click me</button>
+                </div>
+
+                <div style="float: right">
                 <md-card v-if="this.mostrar" style="width: 97%; float: left">
                     <md-card-header>
                         <div class="md-title">Categorías por fecha:</div>
@@ -136,8 +145,10 @@
                         </div>
                     </md-card-media>
                 </md-card>
-
+</div>
+                
             </md-tab>
+
         </md-tabs>
     </div>
     
@@ -172,22 +183,35 @@
 
         methods: {
 
+            cambiarMes(mes){
+
+                if(mes === "Dec"){
+                    return 12
+                }
+
+            },
+
             llamarServicio(){
-                this.mostrar = true
+                console.log("estoy en la funcion llamarServicio");
+                this.mostrar = true;
                 if(this.variableSD == null){
                     //declaracion del json
-                    let fechaInicio = this.selectedInitial + "T02:59:59.000+0000";
-                    let fechaFin = this.selectedFinal + "T03:00:00.000+0000";
 
+                    let fechaInicio = this.selectedInitial + '';
+                    let fechaFinal = this.selectedFinal + '';
+                    let fechaFinSplit = fechaFinal.split(" ");
+                    let fechaServFinal =  fechaFinSplit[3] + "-" + this.cambiarMes(fechaFinSplit[1]) + "-" + fechaFinSplit[2] + "T02:59:59.000+0000";
+                    console.log("la fecha queda configurada como:", fechaServFinal);
                     let json = {
                         "categoria_id": this.categoria,
                         "tipoEncuesta": this.tipoDeEncuesta,
                         "region_id": this.region,
                         "fechaInicial": fechaInicio,
-                        "fechaFinal": fechaFin
+                        "fechaFinal": fechaServFinal
                     };
 
                     //servicio de envio del json
+                    console.log("el json que quiero enviar es:", json);
                     this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json)).then(response => {
                         this.dataGr = response.data;
                         console.log('data de grafico obtenido es:', this.dataGr);
@@ -195,10 +219,12 @@
                         console.log('no obtiene data grafico');
                         this.error = true;
                     });
+                    this.crearGrafico();
                 }
 
                 else {
                     //declaracion del json para SD
+                    console.log("las fechas son: ", this.selectedInitial.split(" "), this.selectedFinal);
                     let fechaInicio = this.selectedInitial + "T02:59:59.000+0000";
                     let fechaFin = this.selectedFinal + "T03:00:00.000+0000";
 
@@ -206,11 +232,13 @@
                         "categoria_id": this.categoria,
                         "tipoEncuesta": this.tipoDeEncuesta,
                         "region_id": this.region,
+                        "variableSD": this.variableSD,
                         "fechaInicial": fechaInicio,
                         "fechaFinal": fechaFin
                     };
 
                     //servicio para SD
+                    console.log("el json que quiero enviar es,", json2);
                     this.$http.post('http://localhost:8092/encuestados/graphicsSD', JSON.stringify(json2)).then(response => {
                         this.dataGr = response.data;
                         console.log('data de graficoSD obtenido es:', this.dataGr);
@@ -218,8 +246,10 @@
                         console.log('no obtiene data graficoSD');
                         this.error = true;
                     });
+
+                    this.crearGrafico();
                 }
-                this.crearGrafico();
+               // this.crearGrafico();
             },
 
 

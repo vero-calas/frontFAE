@@ -81,8 +81,9 @@
                                     <div class="md-title"> Información general </div>
                                 </md-card-header>
                                 <md-card-content>
-                                    e-ematur surge como resultado de la tesis doctoral denominada: “Confianza hacia los Destinos Turísticos. El rol de la Imagen, sus habitantes e Instituciones”. Este estudio fue presentado en el marco del Programa de Doctorado en Ciencias Empresariales impartido por la Facultad de Ciencias Económicas y Empresariales de la Universidad Autónoma de Madrid, España. Cabe destacar que este trabajo de investigación fue calificado como “Sobresaliente Cum Laude”,
-                                    siendo esta la máxima calificación que se puede obtener en España.
+
+                                    e-ematur surge como resultado de la tesis doctoral denominada: “Confianza hacia los Destinos Turísticos. El rol de la Imagen, sus habitantes e Instituciones”. Este estudio fue presentado en el marco del Programa de Doctorado en Ciencias Empresariales impartido por la Facultad de Ciencias Económicas y Empresariales de la Universidad Autónoma de Madrid, España. Cabe destacar que este trabajo de investigación fue calificado como “Sobresaliente Cum Laude”, siendo esta la máxima calificación que se puede obtener en España. Dos son los aportes epistemológicos con los que se contribuye a las ciencias del marketing: 1) un modelo para medir la percepción del consumidor o turista; 2) un modelo multidimensional para medir la confianza del consumidor o turista. Ambos modelos de medición han sido ampliamente probados y aplicados en varias compañías y lugares turístico, obteniéndose excelentes resultados a la hora de mejorar las estrategias de marketing corporativo.
+
                                 </md-card-content>
                             </md-card>
                         </div>
@@ -92,7 +93,9 @@
                                     <div class="md-title"> ¿Quiénes somos? </div>
                                 </md-card-header>
                                 <md-card-content>
-                                    e-ematur es un servicio de medición online de percepciones pionero en el área del marketing turístico.  Es un servicio innovador que permite la detección temprana, prevención, diagnóstico y tratamiento de un débil posicionamiento de imagen logrado por un destino turístico.
+
+                                    e-ematur (electrónica-escala de marketing y turismo) es un servicio de medición online de la percepción que posee un consumidor o turista acerca de un producto, servicio o destino turístico, pionero en el área del marketing. Es un servicio innovador que permite la detección temprana, prevención, diagnóstico y tratamiento de un débil posicionamiento logrado por un producto, servicio, idea, empresa, marca o destino turístico. Es sabido que de la percepción de su producto, servicio o destino turístico dependerá, en gran medida, la satisfacción de su cliente o visitante.
+
                                 </md-card-content>
                             </md-card>
                         </div>
@@ -110,10 +113,12 @@
                     <div>
                         <md-card class="card">
                             <md-card-header>
-                                <div class="md-title">Sobre la empresa: </div>
+                                <div class="md-title">Sobre la iniciativa: </div>
                             </md-card-header>
                             <md-card-content>
-                                <label>e-ematur pretende ser el proveedor líder a nivel mundial de soluciones tecnológicas de marketing para mejorar la percepción de los destinos turísticos. A través de un modelo de suscripción predecible y asequible, nuestros clientes podrán adquirir y aplicar las mejores estrategias de marketing para posicionar, consolidar y/o recordar la imagen de un destino turístico a nivel internacional, nacional o local. Servicios tecnológicos que serán complementados con asesorías y capacitaciones especializadas dictadas por expertos, en el tratamiento de la imagen de los destinos turísticos.</label>
+
+                                    La percepción o imagen desde el punto de vista de marketing es una combinación de aspectos distintos de las características físicas del producto o servicio, pero, no obstante, se identifican con el producto o servicio, como, por ejemplo, el nombre de la marca, los símbolos utilizados en la publicidad, la buena aprobación de una figura conocida o el país de origen de un producto o servicio. La percepción o imagen percibida es la expresión de todo el conocimiento, impresiones, prejuicios y pensamientos emocionales que un individuo o grupo tienen sobre un objeto o un lugar en particular. La percepción de un producto, servicio o destino turístico se forma como resultado de la evaluación de atributos individuales que pueden tener un contenido cognitivo y emocional. En otras palabras, la percepción o imagen es un factor formado por cinco dimensiones: a) la evaluación cognitiva; b) la evaluación afectiva; c) el beneficio funcional; d) el beneficio hedónico y e) el beneficio simbólico percibido por el consumidor o turista. Dimensiones que permiten al consumidor o turista conectarse en forma racional, emocional, enfocado (a) en la solución, placentera o enfocado (a) en la pertenencia social con el producto, servicio o lugar. Siendo estas cinco dimensiones desde el punto de vista de marketing, el soporte básico del triangulo virtuoso entre la calidad-satisfacción y lealtad del consumidor o turista.
+
                             </md-card-content>
                         </md-card>
                     </div>
@@ -135,11 +140,10 @@
                                 <div class="md-title">Información de contacto:</div>
                             </md-card-header>
                             <md-card-content>
-                                <label> A su disposición medios de contacto directo:</label>
+                                A su disposición medios de contacto directo:
                                 <hr>
                                 <label><i class="material-icons">call</i> +56-9-98875670 </label>
-                                <hr>
-                                <label><i class="material-icons">mail_outline</i> enrique.marinao@gmail.com</label>
+
                                 <hr>
                                 <label><i class="material-icons">mail_outline</i> enrique.marinao@usach.cl </label>
                                 <hr>
@@ -155,10 +159,30 @@
 
             <md-tab id="tab-favorites" md-label="Responder encuesta" to="/components/tabs/favorites">
 
-                <div>
+                <div v-if="mostrarOpciones" style="width: 100%; height: 100%">
+                    <md-card style="float: left">
+                        <img src="../src/img/logo.png"/>
+                    </md-card>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <md-card style="width: 700px; margin: 3px">
+                        &nbsp;&nbsp;&nbsp;&nbsp;<label class="md-title">Seleccione los criterios para su encuesta:</label>
+                    <hr><hr>
+                        &nbsp;&nbsp;  <label>¿Qué temática de la encuesta desea responder?</label>
+                        <br>
+                        &nbsp;&nbsp;  <md-radio v-model="opcion1" value="1">Turismo</md-radio>
+                        &nbsp;&nbsp;  <md-radio v-model="opcion1" value="2">Marketing</md-radio>
+                    <hr>
+                        &nbsp;&nbsp;  <label>¿Qué tipo de encuesta desea responder?</label>
+                        <br>
+                        &nbsp;&nbsp;  <md-radio v-model="opcion2" value="1">General</md-radio>
+                        &nbsp;&nbsp;  <md-radio v-model="opcion2" value="2">Resumida</md-radio>
+                    {{opcion1}} {{opcion2}}
+                        <hr>
+                        <md-button class="md-raised" v-on:click="mostrarPrimero">Aceptar</md-button>
+                        </md-card>
+                </div>
 
-
-
+                <div v-if="mostrar1">
                     <div>
                         <!-- opciones  md-vertical, md-horizontal, md-alternative-->
 
@@ -169,9 +193,11 @@
                             <!--                          **************************                                       -->
                             <md-step id="0">
                                 <div>
-                                    <img width="150" height="80" src="https://images.vexels.com/media/users/3/145779/isolated/preview/53f7a1777bd2d2c3f8628d745268c5a3-ilustraci-n-del-loro-by-vexels.png">
-                                    <label>Bienvenido a la encuesta sobre el turismo en Chile</label>
-                                </div>
+                                    <img width="150" height="80" src="../src/img/logo.png">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label>Bienvenido a la encuesta sobre el Marketing en Chile</label> </div>
+
+                            <md-button class="md-raised" v-on:click="backButton">Atrás</md-button>
                             </md-step>
                             <md-step v-model="array" v-if="i!==20" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
                                 <h1>{{datos[i].nombre}}</h1><br>
@@ -201,15 +227,8 @@
                         </md-steppers>
                     </div>
                 </div>
-            </md-tab>
 
-
-            <md-tab id="tab-encuesta2" md-label="Responder encuesta 2" to="/components/tabs/encuesta2">
-
-                <div>
-
-
-
+                <div v-if="mostrar2">
                     <div>
                         <!-- opciones  md-vertical, md-horizontal, md-alternative-->
 
@@ -220,8 +239,71 @@
                             <!--                          **************************                                       -->
                             <md-step id="0">
                                 <div>
-                                    <img width="150" height="80" src="https://images.vexels.com/media/users/3/145779/isolated/preview/53f7a1777bd2d2c3f8628d745268c5a3-ilustraci-n-del-loro-by-vexels.png">
-                                    <label>Bienvenido a la encuesta sobre el turismo en Chile</label>
+                                    <img width="150" height="80" src="../src/img/logo.png">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label>Bienvenido a la encuesta sobre el Turismo en Chile</label> </div>
+                                <md-button v-on:click="backButton">Atrás</md-button>
+                            </md-step>
+                            <md-step v-model="array" v-if="i!==20" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
+                                <h1>{{datos[i].nombre}}</h1><br>
+                                <label>{{datos[i].descripcion}}</label>
+                                <br><label> Por favor, responda según su opinión</label>
+                                <hr>
+                                <div>
+                                    <hr>
+                                    <label>{{listaDescripciones[i]}}</label>
+                                    <div>
+                                        <br>
+                                        <hr>
+                                        <div>
+                                            <md-icon class="md-size-2x" style="color: #08e166">
+                                                sentiment_very_satisfied
+                                            </md-icon>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <md-icon class="md-size-2x" style="color: #fbe246">
+                                                sentiment_satisfied
+                                            </md-icon>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <md-icon class="md-size-2x" style="color: #fb2514">
+                                                sentiment_very_dissatisfied
+                                            </md-icon><br>
+                                            <md-radio v-model=form3 v-for="n in 7">
+                                                <label>
+                                                    {{n}}
+                                                </label>
+                                            </md-radio>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-step>
+
+
+                        </md-steppers>
+                    </div>
+                </div>
+
+                <div v-if="mostrar3">
+                    <div>
+                        <!-- opciones  md-vertical, md-horizontal, md-alternative-->
+
+                        <md-steppers md-horizontal>
+
+
+                            <!--                          SEGUNDA ETAPA DE ENCUESTA                                        -->
+                            <!--                          **************************                                       -->
+                            <md-step id="0">
+                                <div>
+                                    <img width="150" height="80" src="../src/img/logo.png">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label>Bienvenido a la encuesta sobre el Marketing en Chile</label>
+                                    <br>
+                                    <md-button v-on:click="backButton">Atrás</md-button>
                                 </div>
                             </md-step>
                             <md-step v-model="array" v-if="i!==20" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
@@ -231,25 +313,8 @@
                                 <hr>
                                 <div v-model="array2" v-if="j!==20" :key="j" :value="j" v-for="(preguntas,j) in categoria.preguntas">
                                     <hr>
-                                    <label> {{ preguntas.pregunta }} </label>
+                                    <label> {{ cambiarPregunta(preguntas.pregunta) }} </label>
                                     <div>
-                                        <md-icon class="md-size-2x" style="color: #08e166">
-                                            sentiment_very_satisfied
-                                        </md-icon>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <md-icon class="md-size-2x" style="color: #fbe246">
-                                            sentiment_satisfied
-                                        </md-icon>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <md-icon class="md-size-2x" style="color: #fb2514">
-                                            sentiment_very_dissatisfied
-                                        </md-icon><br>
                                         <md-radio v-model="form2[i].respuesta[j]" v-if="k!==14" :key="k" :value="k" v-for="(escala,k) in preguntas.escala">
                                             <label v-if="preguntas.escala !== null">
                                                 {{preguntas.escala[k]}}
@@ -264,11 +329,14 @@
                                 </div>
                             </md-step>
 
+                            <md-button class="md-raised md-primary; center">Enviar Respuestas</md-button>
 
                         </md-steppers>
                     </div>
                 </div>
+
             </md-tab>
+
         </md-tabs>
 
 
@@ -283,23 +351,72 @@
         props: ['datos'],
         data: () => ({
             form2:[],
+            form3: [],
             array:[],
             array2:null,
+            opcion1: null,
+            opcion2: null,
+            mostrarOpciones: true,
+            mostrar1: false,
+            mostrar2: false,
+            mostrar3: false,
+            listaDescripciones: ["Podría ser definida como aquellas estructuras y procesos mentales relacionados con el pensamiento, comprensión, e interpretación de estímulos y eventos. Esto incluye los acontecimientos, significados y creencias que se han desarrollado en los turistas y/o visitantes a partir de sus experiencias y que se almacenan en la memoria.",
+                                  "Es reactiva, es incontrolable en forma directa, se manifiesta a través de expresiones físicas, es fácil de estimular y puede ser aprendida. La respuesta afectiva es reactiva dado que no es una condición planificada ni intencional, por el contrario, el turista responde a factores ambientales que para él son relevantes, por ejemplo, un atardecer a la orilla de un lago.",
+                                "Es una experiencia en múltiples modalidades sensoriales como los gustos, los sonidos, los olores, las impresiones táctiles y las imágenes visuales. Los individuos no sólo responden a las impresiones multisensoriales de los estímulos externos (por ejemplo, una estadía en el desierto bajo una noche estrellada) mediante la codificación de estos insumos sensoriales, sino que también reaccionan mediante la generación de imágenes multisensoriales dentro de sí mismos.",
+                "Puede ser definido como el “yo” real e ideal que tiene el turista. Este “yo” es la suma total de todo lo que una persona pueda llamar propio, su cuerpo, rasgos y habilidades, sus posesiones materiales, su familia, amigos y enemigos, sus vocaciones y ocupaciones y mucho más. Incluye las evaluaciones y definiciones de sí mismo que pueden ser reflejadas a través de sus acciones, incluyendo la evaluación y adquisición de lugares y/o destinos turísticos.",
+                "El beneficio funcional está ligado a las necesidades, al valor, a los fundamentos, a la necesidad esencial y a la resolución de problemas. En concreto, el turista y/o visitante buscará satisfacer sus necesidades funcionales definidas como las que motivan la búsqueda de productos turísticos que resuelvan sus problemas relacionados con el descanso, por ejemplo, resolver un problema de estrés que lo aqueje. "
+            ],
             cantidadCategoria: null
         }),
         created() {
         },
         mounted(){
             this.cantidad();
+            this.cambiarPregunta()
         },
         methods:{
+
+            cambiarPregunta(entrada){
+              for (let i=0; i<30; i++){
+                  var cosa = "Falabella"
+                  var split= entrada.split("Chile")
+                  var preguntaFinal = split[0] + cosa + split[1]
+              }
+              return preguntaFinal
+            },
+
+// opcion1, 1-turismo 2-marketing
+// opcion2, 1-general 2-resumida
+            mostrarPrimero(){
+              if (this.opcion1==='1' && this.opcion2==='1' ){
+                  this.mostrar1 = true;
+                  this.mostrarOpciones = false
+                }
+                else if (this.opcion1==='1' && this.opcion2==='2'){
+                  this.mostrar2 = true;
+                  this.mostrarOpciones = false
+              }
+              else if (this.opcion1==='2' && this.opcion2==='1'){
+                  this.mostrar3 = true;
+                  this.mostrarOpciones = false
+              }
+
+            },
+
+            backButton(){
+              this.mostrarOpciones = true;
+              this.mostrar1 = false;
+              this.mostrar2 = false;
+              this.mostrar3 = false;
+            },
+
             cantidad(){
                 console.log("la data que llega es", this.datos);
                 this.cantidadCategoria = (this._props.datos).length;
                 for (let i=0; i<this.cantidadCategoria; i++){
                     let json ={
                         respuesta: []
-                    }
+                    };
                     this.form2.push(json)
                 }
             }

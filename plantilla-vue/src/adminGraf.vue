@@ -3,7 +3,65 @@
     <div>
         <md-tabs md-sync-route class="md-transparent" md-alignment="fixed">
            <md-tab id="tab-general" md-label="General" to="/components/tabs/generalGraf">
-
+               <md-card style="width: 40%; float: left">
+                   <md-card-header>
+                       <div class="md-title">Gráfico 1:</div>
+                   </md-card-header>
+                   <md-card-media>
+                       <div>
+                           <vue-chart  v-if="this.dataFija1 !== null" type="pie" :data="this.dataFija1"></vue-chart>
+                           <div v-else>
+                               <div class=" lds-css ng-scope">
+                               </div>
+                           </div>
+                       </div>
+                   </md-card-media>
+               </md-card>
+           <br>
+               <md-card style="width: 40%; float: right">
+                   <md-card-header>
+                       <div class="md-title">Gráfico 2:</div>
+                   </md-card-header>
+                   <md-card-media>
+                       <div>
+                           <vue-chart  v-if="this.dataFija2 !== null" type="pie" :data="this.dataFija2"></vue-chart>
+                           <div v-else>
+                               <div class=" lds-css ng-scope">
+                               </div>
+                           </div>
+                       </div>
+                   </md-card-media>
+               </md-card>
+               <br>
+               <md-card style="width: 40%; float: left">
+                   <md-card-header>
+                       <div class="md-title">Gráfico 3:</div>
+                   </md-card-header>
+                   <md-card-media>
+                       <div>
+                           <vue-chart  v-if="this.dataFija3 !== null" type="pie" :data="this.dataFija3"></vue-chart>
+                           <div v-else>
+                               <div class=" lds-css ng-scope">
+                               </div>
+                           </div>
+                       </div>
+                   </md-card-media>
+               </md-card>
+               <br>
+               <md-card style="width: 40%; float: right">
+                   <md-card-header>
+                       <div class="md-title">Gráfico 4:</div>
+                   </md-card-header>
+                   <md-card-media>
+                       <div>
+                           <vue-chart  v-if="this.dataFija4 !== null" type="pie" :data="this.dataFija4"></vue-chart>
+                           <div v-else>
+                               <div class=" lds-css ng-scope">
+                               </div>
+                           </div>
+                       </div>
+                   </md-card-media>
+               </md-card>
            </md-tab>
 
             <md-tab id="tab-filter" md-label="Filtrar Gráfico" to="/components/tabs/filterGraf">
@@ -127,7 +185,7 @@
 
                 </md-card>
 
-               <button @change="llamarServicio">Click me</button>
+               <button v-on:click="crearGrafico">Click me</button>
                 </div>
 
                 <div style="float: right; width: 50%">
@@ -137,7 +195,7 @@
                     </md-card-header>
                     <md-card-media>
                         <div v-if="this.showd">
-                            <vue-chart  v-if="this.barData !== null" type="pie" :data="this.barData"></vue-chart>
+                            <vue-chart  v-if="this.pieData !== null" type="pie" :data="this.pieData"></vue-chart>
                             <div v-else>
                                 <div class=" lds-css ng-scope">
                                 </div>
@@ -173,8 +231,73 @@
             dataGr: null,
             dataGrSD: null,
             error: false,
+            pieData: null,
             showd: null,
-            mostrar: false
+            mostrar: false,
+            dataFija1: {
+                labels: ["Aprobados", "Desaprobados", "Neutro"],
+                datasets: [
+                    {
+                        //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
+                        data: [100, 20, 30],
+                        label: ["Puntuación alcanzada"],
+                        backgroundColor: [
+                            '#D4E157',
+                            '#e15545',
+                            '#fbe246'
+                        ],
+                    },
+
+                ]
+            },
+            dataFija2: {
+                labels: ["Aprobados", "Desaprobados", "Neutro"],
+                datasets: [
+                    {
+                        //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
+                        data: [40, 40, 40],
+                        label: ["Puntuación alcanzada"],
+                        backgroundColor: [
+                            '#D4E157',
+                            '#e15545',
+                            '#fbe246'
+                        ],
+                    },
+
+                ]
+            },
+            dataFija3: {
+                labels: ["Aprobados", "Desaprobados", "Neutro"],
+                datasets: [
+                    {
+                        //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
+                        data: [20, 0, 30],
+                        label: ["Puntuación alcanzada"],
+                        backgroundColor: [
+                            '#D4E157',
+                            '#e15545',
+                            '#fbe246'
+                        ],
+                    },
+
+                ]
+            },
+            dataFija4: {
+                labels: ["Aprobados", "Desaprobados", "Neutro"],
+                datasets: [
+                    {
+                        //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
+                        data: [30, 30, 90],
+                        label: ["Puntuación alcanzada"],
+                        backgroundColor: [
+                            '#D4E157',
+                            '#e15545',
+                            '#fbe246'
+                        ],
+                    },
+
+                ]
+            }
         }),
 
         created() {
@@ -198,6 +321,7 @@
 
                 //servicio de envio del json
                 console.log("el json que quiero enviar es:", json);
+                /*
                 this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json), auth).then(response => {
                    console.log("entre")
                     this.dataGr = response.data;
@@ -206,6 +330,7 @@
                     console.log('no obtiene data grafico');
                     this.error = true;
                 });
+                */
             },
 
             cambiarMes(mes){
@@ -237,6 +362,7 @@
 
                     //servicio de envio del json
                     console.log("el json que quiero enviar es:", json);
+                    /*
                     this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json)).then(response => {
                         this.dataGr = response.data;
                         console.log('data de grafico obtenido es:', this.dataGr);
@@ -245,6 +371,7 @@
                         this.error = true;
                     });
                     this.crearGrafico();
+                    */
                 }
 
                 else {
@@ -264,6 +391,7 @@
 
                     //servicio para SD
                     console.log("el json que quiero enviar es,", json2);
+                    /*
                     this.$http.post('http://localhost:8092/encuestados/graphicsSD', JSON.stringify(json2)).then(response => {
                         this.dataGr = response.data;
                         console.log('data de graficoSD obtenido es:', this.dataGr);
@@ -271,7 +399,7 @@
                         console.log('no obtiene data graficoSD');
                         this.error = true;
                     });
-
+*/
                     this.crearGrafico();
                 }
                // this.crearGrafico();
@@ -279,21 +407,23 @@
 
 
             crearGrafico(){
-                let barData = {
+                 this.pieData = {
                     labels: ["Aprobados", "Desaprobados", "Neutro"],
                     datasets: [
                         {
                             //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
                             data: [20, 120, 30],
                             label: ["Puntuación alcanzada"],
-                            backgroundColor: ['#D4E157','#D4E157','#D4E157','#D4E157','#D4E157',
-                                '#D4E157','#D4E157','#D4E157','#D4E157','#D4E157','#D4E157','#D4E157','#D4E157','#D4E157',
-                                '#D4E157','#D4E157','#D4E157'],
+                            backgroundColor: [
+                                '#D4E157',
+                                '#e15545',
+                                '#fbe246'
+                                ],
                         },
 
                     ]
                 };
-                return barData
+                 this.showd=true
             }
         }
     }

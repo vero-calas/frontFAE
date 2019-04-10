@@ -11,7 +11,6 @@ Vue.use(VueResource);
 import VueCarousel from 'vue-carousel';
 Vue.use(VueCarousel);
 import App from './App.vue';
-import trofeos from './trofeos.vue';
 import firebase from 'firebase';
 Vue.http.options.emulateJSON = true
 var config = {
@@ -26,7 +25,7 @@ firebase.initializeApp(config);
 
 
 const routes = [
-    { path: '/trofeos', component: trofeos}
+    {}
 ]
 
 // Create the router instance and pass the `routes` option

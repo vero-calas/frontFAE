@@ -3,8 +3,12 @@
     <div>
 
         <md-tabs md-sync-route class="md-transparent" md-alignment="fixed">
-            <md-tab id="tab-home" md-label="Home" to="/components/tabs/home">
+            <md-tab id="tab-home" md-label="Editar encuestas" to="/components/tabs/home">
+<md-card>
+    <label>Escriba el nombre de la empresa de Marketing que desea encuestar:</label>
+    <md-field v-model="empresa"></md-field>
 
+</md-card>
             </md-tab>
 
         <md-tab id="tab-posts" md-label="Estadísticas por Empresa" to="/components/tabs/posts">
@@ -249,7 +253,7 @@
             dataPreguntas: null,
 
 
-
+empresa: null,
 
                          buscarCorr: null,
                          buscarNom: null,
@@ -320,12 +324,13 @@
 
 
                 console.log("jsooooooooooooon", this.json)
-
+/*
                 this.$http.post('http://localhost:8092/categories/', this.json).then((response) => {
                     console.log("Hice el post")
                 }, (response) => {
                     console.log("Fallo servicio")
                 });
+                */
             },
 
 

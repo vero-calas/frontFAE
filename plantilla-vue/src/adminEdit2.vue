@@ -279,12 +279,12 @@
 
 
                 console.log("jsooooooooooooon", this.json)
-
-                this.$http.post('http://localhost:8092/categories/', this.json).then((response) => {
+               /* this.$http.post('http://localhost:8092/categories/', this.json).then((response) => {
                     console.log("Hice el post")
                 }, (response) => {
                     console.log("Fallo servicio")
                 });
+                */
             },
 
 

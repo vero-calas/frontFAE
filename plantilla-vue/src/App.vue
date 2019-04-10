@@ -24,7 +24,7 @@
 
             <md-app-drawer :md-active.sync="menuVisible" md-persistent="full" v-if="this.role === 0 || this.role === 1">
                 <md-toolbar class="md-transparent" md-elevation="0">
-                 H
+                    <img src="../src/img/logo.png"/>
                 </md-toolbar>
 
                 <div class="list-group" v-if="this.role === 1">
@@ -125,8 +125,8 @@
         data: () => ({
             load: 0,
             //role 0 = admin; role 1 = empresa; role 2 = usuario natural
-           // role: Number(localStorage.getItem('role'))-1,
-            role: 0,
+            role: Number(localStorage.getItem('role'))-1,
+           // role: 0,
             error:false,
             showDialogLogin: false,
             showDialogRegister: false,
@@ -163,6 +163,7 @@
             const auth = {
                 headers: {'Authorization':'Bearer ' + localStorage.getItem('authtoken')}
             }
+            /*
             this.$http.get('http://localhost:8092/categories/all',auth).then(response => {
                 this.preguntas = response.data;
                 console.log('data de regiones obtenido es:', this.preguntas);
@@ -215,7 +216,9 @@
                 if(now-lstime > hours*60*60*1000){
                     localStorage.clear();
                 } }, 5*60*1000);
+                */
         },
+
         methods: {
             setSelectedItemHome(){
                 this.eleccion=1;
@@ -245,6 +248,7 @@
                     correo: this.email,
                     contrasena: this.password
                 }
+                /*
                 this.$http.post('http://localhost:8092/usuarios/login',JSON.stringify(this.loginjson),config).then((response) => {
                     localStorage.setItem('authtoken',response.body.Authorization);
                     localStorage.setItem('name',response.body.nombre);
@@ -254,6 +258,7 @@
                 }, (response) =>{
                     console.log("No se logro el login",response)
                 });
+                */
             },
             servicioLogout(){
                 localStorage.clear();
@@ -304,5 +309,8 @@
     }
     body{
         background: #FAEFD7 ;
+    }
+    p {
+        background-image: url("img/logo.png");
     }
 </style>

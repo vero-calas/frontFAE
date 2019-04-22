@@ -353,6 +353,20 @@
         props: ['datos'],
         data: () => ({
             form2:[],
+    jsonFinal: {
+        correo : null,
+        nivelDeEstudio: null,
+        situacionLaboral: null,
+        nivelDeIngreso: null,
+        sexo: null,
+        estadoCivil: null,
+        rangoDeEdad: null,
+        fecha: null,
+        idregion: null,
+        telefono: null,
+        tipoEncuesta: null,
+        resultados: null
+    },
             form3: [],
             array:[],
             array2:null,
@@ -446,6 +460,7 @@
                 for (let i=0; i<this.cantidadCategoria; i++){
                     let json ={
                         respuesta: [],
+                        idcategoria: i
                     };
                     console.log("este es el form2", this.form2)
                     console.log("este es el json", json)
@@ -467,6 +482,8 @@
             },
 
             guardarRespuestas(){
+                this.jsonFinal.resultados = this.form2
+                console.log("json final", this.jsonFinal)
                 console.log(this.form2);
                 console.log(this.form3)
             }

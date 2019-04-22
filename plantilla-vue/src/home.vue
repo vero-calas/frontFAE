@@ -189,7 +189,7 @@
                         <md-steppers md-horizontal>
 
 
-                            <!--                          SEGUNDA ETAPA DE ENCUESTA                                        -->
+                            <!--                          ENCUESTA DE MARKETING                                        -->
                             <!--                          **************************                                       -->
                             <md-step id="0">
                                 <div>
@@ -220,10 +220,8 @@
                                         </md-radio>
                                     </div>
                                 </div>
+                                <md-button v-on:click="guardarRespuestas" class="md-raised md-primary; center">Enviar Respuestas</md-button>
                             </md-step>
-
-                            <md-button class="md-raised md-primary; center">Enviar Respuestas</md-button>
-
                         </md-steppers>
                     </div>
                 </div>
@@ -235,7 +233,7 @@
                         <md-steppers md-horizontal>
 
 
-                            <!--                          SEGUNDA ETAPA DE ENCUESTA                                        -->
+                            <!--                          ENCUESTA DE MARKETING RESUMIDA                                       -->
                             <!--                          **************************                                       -->
                             <md-step id="0">
                                 <div>
@@ -273,14 +271,18 @@
                                             <md-icon class="md-size-2x" style="color: #fb2514">
                                                 sentiment_very_dissatisfied
                                             </md-icon><br>
-                                            <md-radio v-model=form3 v-for="n in 7">
+
+                                            <md-radio v-model=form3 v-for="n in 7" :value="n">
                                                 <label>
                                                     {{n}}
                                                 </label>
                                             </md-radio>
+
                                         </div>
                                     </div>
                                 </div>
+                                <md-button v-on:click="guardarRespuestas" class="md-raised md-primary; center">Enviar Respuestas</md-button>
+
                             </md-step>
 
 
@@ -327,13 +329,13 @@
                                         </md-radio>
                                     </div>
                                 </div>
+
                             </md-step>
-
-                            <md-button class="md-raised md-primary; center">Enviar Respuestas</md-button>
-
+                            <md-button v-on:click="guardarRespuestas" class="md-raised md-primary; center">Enviar Respuestas</md-button>
                         </md-steppers>
                     </div>
                 </div>
+
 
             </md-tab>
 
@@ -354,6 +356,7 @@
             form3: [],
             array:[],
             array2:null,
+            empresa: null,
             opcion1: null,
             opcion2: null,
             mostrarOpciones: true,
@@ -372,15 +375,31 @@
         },
         mounted(){
             this.cantidad();
-            this.cambiarPregunta()
+            this.cantidadSentimiento();
+            this.cambiarPregunta();
+
         },
         methods:{
 
             cambiarPregunta(entrada){
-              for (let i=0; i<30; i++){
-                  var cosa = "Falabella"
-                  var split= entrada.split("Chile")
-                  var preguntaFinal = split[0] + cosa + split[1]
+                this.$http.get('http://localhost:8092/categories/all').then(response => {
+                    this.empresa = response.data;
+                    console.log('data de regiones obtenido es:', this.empresa);
+                }, (response) => {
+                    this.error = true;
+                    console.log('no obtiene regiones');
+                });
+
+              for (let i=0; i < 20 ; i++){
+                  var cosa = this.empresa[0].empresa;
+                  if (entrada[i] === "Chile") {
+                      var split = entrada.split("Chile");
+                      var preguntaFinal = split[0] + cosa + split[1]
+                  }
+                  else {
+                      console.log("no hice nada jaja")
+                  }
+
               }
               return preguntaFinal
             },
@@ -390,17 +409,28 @@
             mostrarPrimero(){
               if (this.opcion1==='1' && this.opcion2==='1' ){
                   this.mostrar1 = true;
+                  this.mostrar2 = false;
+                  this.mostrar3 = false;
                   this.mostrarOpciones = false
                 }
                 else if (this.opcion1==='1' && this.opcion2==='2'){
                   this.mostrar2 = true;
+                  this.mostrar1 = false;
+                  this.mostrar3 = false;
                   this.mostrarOpciones = false
               }
               else if (this.opcion1==='2' && this.opcion2==='1'){
                   this.mostrar3 = true;
+                  this.mostrar1 = false;
+                  this.mostrar2 = false;
                   this.mostrarOpciones = false
               }
-
+              else if (this.opcion1==='2' && this.opcion2==='2'){
+                  this.mostrar2 = true;
+                  this.mostrar1 = false;
+                  this.mostrar3 = false;
+                  this.mostrarOpciones = false
+              }
             },
 
             backButton(){
@@ -415,10 +445,30 @@
                 this.cantidadCategoria = (this._props.datos).length;
                 for (let i=0; i<this.cantidadCategoria; i++){
                     let json ={
-                        respuesta: []
+                        respuesta: [],
                     };
+                    console.log("este es el form2", this.form2)
+                    console.log("este es el json", json)
                     this.form2.push(json)
                 }
+            },
+
+            cantidadSentimiento(){
+                console.log("la data que llega es", this.datos);
+                this.cantidadCategoria = (this._props.datos).length;
+                for (let i=0; i<this.cantidadCategoria; i++){
+                    let json ={
+                        respuesta: [],
+                    };
+                    console.log("este es el form3", this.form3)
+                    console.log("este es el json", json)
+                    this.form3.push(json)
+                }
+            },
+
+            guardarRespuestas(){
+                console.log(this.form2);
+                console.log(this.form3)
             }
         }
     }

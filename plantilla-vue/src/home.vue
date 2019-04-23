@@ -189,7 +189,7 @@
                         <md-steppers md-horizontal>
 
 
-                            <!--                          ENCUESTA DE MARKETING                                        -->
+                            <!--                          ENCUESTA DE Turismo                                        -->
                             <!--                          **************************                                       -->
                             <md-step id="0">
                                 <div>
@@ -199,7 +199,59 @@
 
                             <md-button class="md-raised" v-on:click="backButton">Atrás</md-button>
                             </md-step>
-                            <md-step v-model="array" v-if="i!==20" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
+
+
+                            <md-step id="1">
+                                <div>
+                                <h1>Datos personales</h1>
+                                <label>Por favor señale su nivel de estudios:</label>
+                                <hr>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Básica incompleta">
+                                    <label>Básica incompleta</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Básica completa">
+                                    <label>Básica completa</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Media incompleta">
+                                    <label>Media incompleta</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Media completa">
+                                    <label>Media completa</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Técnico (o instituto profesional) incompleto">
+                                    <label>Técnico (o instituto profesional) incompleto</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Técnico (o instituto profesional) completo">
+                                    <label>Técnico (o instituto profesional) completo</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Universitario incompleto">
+                                    <label>Universitario incompleto</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Universitario completo">
+                                    <label>Universitario completo</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Estudios de postgrado incompleto">
+                                    <label>Estudios de postgrado incompleto</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Estudios de postgrado completo">
+                                    <label>Estudios de postgrado completo</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="Otro">
+                                    <label>Otro</label>
+                                </md-radio>
+                                <md-radio v-model="jsonFinal.nivelDeEstudio" value="No sabe-No Responde">
+                                    <label>No sabe-No Responde</label>
+                                </md-radio>
+                                {{jsonFinal.nivelDeEstudio}}
+                                </div>
+                                <div>
+
+                                </div>
+
+
+                            </md-step>
+
+                            <md-step v-model="array" v-if="i>0" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
                                 <h1>{{datos[i].nombre}}</h1><br>
                                 <label>{{datos[i].descripcion}}</label>
                                 <br><label> Por favor, responda según su opinión</label>
@@ -233,7 +285,7 @@
                         <md-steppers md-horizontal>
 
 
-                            <!--                          ENCUESTA DE MARKETING RESUMIDA                                       -->
+                            <!--                          ENCUESTA DE Turismo RESUMIDA                                       -->
                             <!--                          **************************                                       -->
                             <md-step id="0">
                                 <div>
@@ -242,7 +294,58 @@
                                     <label>Bienvenido a la encuesta sobre el Turismo en Chile</label> </div>
                                 <md-button v-on:click="backButton">Atrás</md-button>
                             </md-step>
-                            <md-step v-model="array" v-if="i!==20" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
+                            <md-step id="1">
+                                <div>
+                                    <h1>Datos personales</h1>
+                                    <label>Por favor señale su nivel de estudios:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Básica incompleta">
+                                        <label>Básica incompleta</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Básica completa">
+                                        <label>Básica completa</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Media incompleta">
+                                        <label>Media incompleta</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Media completa">
+                                        <label>Media completa</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Técnico (o instituto profesional) incompleto">
+                                        <label>Técnico (o instituto profesional) incompleto</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Técnico (o instituto profesional) completo">
+                                        <label>Técnico (o instituto profesional) completo</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Universitario incompleto">
+                                        <label>Universitario incompleto</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Universitario completo">
+                                        <label>Universitario completo</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Estudios de postgrado incompleto">
+                                        <label>Estudios de postgrado incompleto</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Estudios de postgrado completo">
+                                        <label>Estudios de postgrado completo</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Otro">
+                                        <label>Otro</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="No sabe-No Responde">
+                                        <label>No sabe-No Responde</label>
+                                    </md-radio>
+                                    {{jsonFinalSentimiento.nivelDeEstudio}}
+                                </div> <!--  Nivel de estudios   -->
+
+                                <div>
+
+                                </div>
+
+
+                            </md-step>
+
+                            <md-step v-model="array" v-if="i>0" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
                                 <h1>{{datos[i].nombre}}</h1><br>
                                 <label>{{datos[i].descripcion}}</label>
                                 <br><label> Por favor, responda según su opinión</label>
@@ -272,11 +375,12 @@
                                                 sentiment_very_dissatisfied
                                             </md-icon><br>
 
-                                            <md-radio v-model=form3 v-for="n in 7" :value="n">
+                                            <md-radio v-model=form3[i] v-for="n in 7" :value="n">
                                                 <label>
                                                     {{n}}
                                                 </label>
                                             </md-radio>
+                                            {{form3}}
 
                                         </div>
                                     </div>
@@ -353,21 +457,35 @@
         props: ['datos'],
         data: () => ({
             form2:[],
-    jsonFinal: {
-        correo : null,
-        nivelDeEstudio: null,
-        situacionLaboral: null,
-        nivelDeIngreso: null,
-        sexo: null,
-        estadoCivil: null,
-        rangoDeEdad: null,
-        fecha: null,
-        idregion: null,
-        telefono: null,
-        tipoEncuesta: null,
-        resultados: null
-    },
+            jsonFinal: {
+                correo : null,
+                nivelDeEstudio: null,
+                situacionLaboral: null,
+                nivelDeIngreso: null,
+                sexo: null,
+                estadoCivil: null,
+                rangoDeEdad: null,
+                fecha: null,
+                idregion: null,
+                telefono: null,
+                tipoEncuesta: null,
+                resultados: null
+            },
             form3: [],
+            jsonFinalSentimiento: {
+                correo : null,
+                nivelDeEstudio: null,
+                situacionLaboral: null,
+                nivelDeIngreso: null,
+                sexo: null,
+                estadoCivil: null,
+                rangoDeEdad: null,
+                fecha: null,
+                idregion: null,
+                telefono: null,
+                tipoEncuesta: null,
+                resultados: null
+            },
             array:[],
             array2:null,
             empresa: null,
@@ -455,9 +573,8 @@
             },
 
             cantidad(){
-                console.log("la data que llega es", this.datos);
-                this.cantidadCategoria = (this._props.datos).length;
-                for (let i=0; i<this.cantidadCategoria; i++){
+                this.cantidadCategoria = (this.datos).length;
+                for (let i=0; i<this.cantidadCategoria ; i++){
                     let json ={
                         respuesta: [],
                         idcategoria: i
@@ -474,6 +591,7 @@
                 for (let i=0; i<this.cantidadCategoria; i++){
                     let json ={
                         respuesta: [],
+                        idcategoria: i
                     };
                     console.log("este es el form3", this.form3)
                     console.log("este es el json", json)
@@ -483,6 +601,7 @@
 
             guardarRespuestas(){
                 this.jsonFinal.resultados = this.form2
+//                this.jsonFinalSentimiento.resultados = this.form3
                 console.log("json final", this.jsonFinal)
                 console.log(this.form2);
                 console.log(this.form3)

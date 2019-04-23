@@ -187,8 +187,6 @@
                         <!-- opciones  md-vertical, md-horizontal, md-alternative-->
 
                         <md-steppers md-horizontal>
-
-
                             <!--                          ENCUESTA DE Turismo                                        -->
                             <!--                          **************************                                       -->
                             <md-step id="0">
@@ -203,7 +201,53 @@
 
                             <md-step id="1">
                                 <div>
-                                <h1>Datos personales</h1>
+                                    <h1>Datos personales</h1>
+                                    <label>Por favor seleccione la región a evaluar:</label>
+                                    <div class="md-layout md-gutter">
+                                        <div class="md-layout-item">
+                                            <md-field>
+                                                <md-select v-model="jsonFinal.idregion" name="region" id="region">
+                                                    <md-option value="1">XV - Arica y Parinacota</md-option>
+                                                    <md-option value="2">I - Tarapacá</md-option>
+                                                    <md-option value="3">II - Antofagasta</md-option>
+                                                    <md-option value="4">III - Atacama</md-option>
+                                                    <md-option value="5">IV - Coquimbo</md-option>
+                                                    <md-option value="6">V - Valparaíso</md-option>
+                                                    <md-option value="7">VI - Libertador Bernardo O'Higgins</md-option>
+                                                    <md-option value="8">VII - Maule</md-option>
+                                                    <md-option value="9">VIII - Bío-Bío</md-option>
+                                                    <md-option value="10">IX - La Araucanía</md-option>
+                                                    <md-option value="11">XIV - Los Ríos</md-option>
+                                                    <md-option value="12">X - Los Lagos</md-option>
+                                                    <md-option value="13">XI - Aysén</md-option>
+                                                    <md-option value="14">XII - Magallanes y la Antártica Chilena</md-option>
+                                                    <md-option value="15">RM - Metropolitana</md-option>
+                                                </md-select>
+                                            </md-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Teléfono:</label>
+                                    <md-field>
+                                        <label>Por favor escriba acá su teléfono </label>
+                                        <md-input v-model="jsonFinal.telefono"></md-input>
+                                        <span class="md-helper-text">Ejemplo: +569 12345678</span>
+                                    </md-field>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Correo electrónico:</label>
+                                <md-field>
+                                    <label>Por favor escriba acá su correo electrónico</label>
+                                    <md-input v-model="jsonFinal.correo"></md-input>
+                                    <span class="md-helper-text">Ejemplo: ejemplo@correo.com</span>
+                                </md-field>
+                                </div>
+                                <br>
+                                <hr>
+                                <div>
                                 <label>Por favor señale su nivel de estudios:</label>
                                 <hr>
                                 <md-radio v-model="jsonFinal.nivelDeEstudio" value="Básica incompleta">
@@ -242,13 +286,131 @@
                                 <md-radio v-model="jsonFinal.nivelDeEstudio" value="No sabe-No Responde">
                                     <label>No sabe-No Responde</label>
                                 </md-radio>
-                                {{jsonFinal.nivelDeEstudio}}
                                 </div>
+                                <br>
                                 <div>
-
+                                    <label>Por favor señale su situación laboral:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Trabaja part time">
+                                        <label>Trabaja part time</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Trabaja full time">
+                                        <label>Trabaja full time</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Busca empleo">
+                                        <label>Busca empleo</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Dueña de Casa">
+                                        <label>Dueña de Casa</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Jubilado">
+                                        <label>Jubilado</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Estudiante">
+                                        <label>Estudiante</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="No sabe-No Responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
                                 </div>
-
-
+                                <br>
+                                <div>
+                                    <label>Por favor señale su nivel de ingresos:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Menos de 150.000">
+                                        <label>Menos de 150.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 150.001 y 250.000">
+                                        <label>Entre 150.001 y 250.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 250.001 y 450.000">
+                                        <label>Entre 250.001 y 450.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 450.001 y 750.000">
+                                        <label>Entre 450.001 y 750.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 750.001 y 1.000.000">
+                                        <label>Entre 750.001 y 1.000.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 1.000.001 y 1.500.000">
+                                        <label>Entre 1.000.001 y 1.500.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 1.500.001 y 2.000.000">
+                                        <label>Entre 1.500.001 y 2.000.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 2.000.001 y 3.000.000">
+                                        <label>Entre 2.000.001 y 3.000.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Más de 3.000.001">
+                                        <label>Más de 3.000.001</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="No sabe-No responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su género:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.genero" value="Masculino">
+                                        <label>Masculino</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.genero" value="Femenino">
+                                        <label>Femenino</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.genero" value="No binario">
+                                        <label>No binario</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su estado civil:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Casada(o)">
+                                        <label>Casada(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Soltera(o)">
+                                        <label>Soltera(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Divorciada(o) o Separada(o)">
+                                        <label>Divorciada(o) o Separada(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Viuda(o)">
+                                        <label>Viuda(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Otro">
+                                        <label>Otro</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="No sabe-No responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su edad:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 18 y 24">
+                                        <label>Entre 18 y 24</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 25 y 34">
+                                        <label>Entre 25 y 34</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 35 y 44">
+                                        <label>Entre 35 y 44</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 45 y 54">
+                                        <label>Entre 45 y 54</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 55 y 64">
+                                        <label>Entre 55 y 64</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Mayor de 65">
+                                        <label>Mayor de 65</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="No sabe-No responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
                             </md-step>
 
                             <md-step v-model="array" v-if="i>0" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
@@ -294,9 +456,56 @@
                                     <label>Bienvenido a la encuesta sobre el Turismo en Chile</label> </div>
                                 <md-button v-on:click="backButton">Atrás</md-button>
                             </md-step>
+
                             <md-step id="1">
                                 <div>
                                     <h1>Datos personales</h1>
+                                    <label>Por favor seleccione la región a evaluar:</label>
+                                    <div class="md-layout md-gutter">
+                                        <div class="md-layout-item">
+                                            <md-field>
+                                                <md-select v-model="jsonFinalSentimiento.idregion" name="region" id="region">
+                                                    <md-option value="1">XV - Arica y Parinacota</md-option>
+                                                    <md-option value="2">I - Tarapacá</md-option>
+                                                    <md-option value="3">II - Antofagasta</md-option>
+                                                    <md-option value="4">III - Atacama</md-option>
+                                                    <md-option value="5">IV - Coquimbo</md-option>
+                                                    <md-option value="6">V - Valparaíso</md-option>
+                                                    <md-option value="7">VI - Libertador Bernardo O'Higgins</md-option>
+                                                    <md-option value="8">VII - Maule</md-option>
+                                                    <md-option value="9">VIII - Bío-Bío</md-option>
+                                                    <md-option value="10">IX - La Araucanía</md-option>
+                                                    <md-option value="11">XIV - Los Ríos</md-option>
+                                                    <md-option value="12">X - Los Lagos</md-option>
+                                                    <md-option value="13">XI - Aysén</md-option>
+                                                    <md-option value="14">XII - Magallanes y la Antártica Chilena</md-option>
+                                                    <md-option value="15">RM - Metropolitana</md-option>
+                                                </md-select>
+                                            </md-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Teléfono:</label>
+                                    <md-field>
+                                        <label>Por favor escriba acá su teléfono </label>
+                                        <md-input v-model="jsonFinalSentimiento.telefono"></md-input>
+                                        <span class="md-helper-text">Ejemplo: +569 12345678</span>
+                                    </md-field>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Correo electrónico:</label>
+                                    <md-field>
+                                        <label>Por favor escriba acá su correo electrónico</label>
+                                        <md-input v-model="jsonFinalSentimiento.correo"></md-input>
+                                        <span class="md-helper-text">Ejemplo: ejemplo@correo.com</span>
+                                    </md-field>
+                                </div>
+                                <br>
+                                <hr>
+                                <div>
                                     <label>Por favor señale su nivel de estudios:</label>
                                     <hr>
                                     <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="Básica incompleta">
@@ -335,15 +544,133 @@
                                     <md-radio v-model="jsonFinalSentimiento.nivelDeEstudio" value="No sabe-No Responde">
                                         <label>No sabe-No Responde</label>
                                     </md-radio>
-                                    {{jsonFinalSentimiento.nivelDeEstudio}}
-                                </div> <!--  Nivel de estudios   -->
-
-                                <div>
-
                                 </div>
-
-
+                                <br>
+                                <div>
+                                    <label>Por favor señale su situación laboral:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinalSentimiento.situacionLaboral" value="Trabaja part time">
+                                        <label>Trabaja part time</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.situacionLaboral" value="Trabaja full time">
+                                        <label>Trabaja full time</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.situacionLaboral" value="Busca empleo">
+                                        <label>Busca empleo</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.situacionLaboral" value="Dueña de Casa">
+                                        <label>Dueña de Casa</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.situacionLaboral" value="Jubilado">
+                                        <label>Jubilado</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.situacionLaboral" value="Estudiante">
+                                        <label>Estudiante</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.situacionLaboral" value="No sabe-No Responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su nivel de ingresos:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="Menos de 150.000">
+                                        <label>Menos de 150.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="Entre 150.001 y 250.000">
+                                        <label>Entre 150.001 y 250.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="Entre 250.001 y 450.000">
+                                        <label>Entre 250.001 y 450.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="Entre 450.001 y 750.000">
+                                        <label>Entre 450.001 y 750.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="Entre 750.001 y 1.000.000">
+                                        <label>Entre 750.001 y 1.000.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="Entre 1.000.001 y 1.500.000">
+                                        <label>Entre 1.000.001 y 1.500.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="Entre 1.500.001 y 2.000.000">
+                                        <label>Entre 1.500.001 y 2.000.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="Entre 2.000.001 y 3.000.000">
+                                        <label>Entre 2.000.001 y 3.000.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="Más de 3.000.001">
+                                        <label>Más de 3.000.001</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.nivelDeIngreso" value="No sabe-No responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su género:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinalSentimiento.genero" value="Masculino">
+                                        <label>Masculino</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.genero" value="Femenino">
+                                        <label>Femenino</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.genero" value="No binario">
+                                        <label>No binario</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su estado civil:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinalSentimiento.estadoCivil" value="Casada(o)">
+                                        <label>Casada(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.estadoCivil" value="Soltera(o)">
+                                        <label>Soltera(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.estadoCivil" value="Divorciada(o) o Separada(o)">
+                                        <label>Divorciada(o) o Separada(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.estadoCivil" value="Viuda(o)">
+                                        <label>Viuda(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.estadoCivil" value="Otro">
+                                        <label>Otro</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.estadoCivil" value="No sabe-No responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su edad:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinalSentimiento.rangoDeEdad" value="Entre 18 y 24">
+                                        <label>Entre 18 y 24</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.rangoDeEdad" value="Entre 25 y 34">
+                                        <label>Entre 25 y 34</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.rangoDeEdad" value="Entre 35 y 44">
+                                        <label>Entre 35 y 44</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.rangoDeEdad" value="Entre 45 y 54">
+                                        <label>Entre 45 y 54</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.rangoDeEdad" value="Entre 55 y 64">
+                                        <label>Entre 55 y 64</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.rangoDeEdad" value="Mayor de 65">
+                                        <label>Mayor de 65</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinalSentimiento.rangoDeEdad" value="No sabe-No responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
                             </md-step>
+
 
                             <md-step v-model="array" v-if="i>0" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
                                 <h1>{{datos[i].nombre}}</h1><br>
@@ -413,7 +740,224 @@
                                     <md-button v-on:click="backButton">Atrás</md-button>
                                 </div>
                             </md-step>
-                            <md-step v-model="array" v-if="i!==20" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
+
+
+                            <md-step id="1">
+                                <div>
+                                    <h1>Datos personales</h1>
+                                    <label>Por favor seleccione la región a evaluar:</label>
+                                    <div class="md-layout md-gutter">
+                                        <div class="md-layout-item">
+                                            <md-field>
+                                                <md-select v-model="jsonFinal.idregion" name="region" id="region">
+                                                    <md-option value="1">XV - Arica y Parinacota</md-option>
+                                                    <md-option value="2">I - Tarapacá</md-option>
+                                                    <md-option value="3">II - Antofagasta</md-option>
+                                                    <md-option value="4">III - Atacama</md-option>
+                                                    <md-option value="5">IV - Coquimbo</md-option>
+                                                    <md-option value="6">V - Valparaíso</md-option>
+                                                    <md-option value="7">VI - Libertador Bernardo O'Higgins</md-option>
+                                                    <md-option value="8">VII - Maule</md-option>
+                                                    <md-option value="9">VIII - Bío-Bío</md-option>
+                                                    <md-option value="10">IX - La Araucanía</md-option>
+                                                    <md-option value="11">XIV - Los Ríos</md-option>
+                                                    <md-option value="12">X - Los Lagos</md-option>
+                                                    <md-option value="13">XI - Aysén</md-option>
+                                                    <md-option value="14">XII - Magallanes y la Antártica Chilena</md-option>
+                                                    <md-option value="15">RM - Metropolitana</md-option>
+                                                </md-select>
+                                            </md-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Teléfono:</label>
+                                    <md-field>
+                                        <label>Por favor escriba acá su teléfono </label>
+                                        <md-input v-model="jsonFinal.telefono"></md-input>
+                                        <span class="md-helper-text">Ejemplo: +569 12345678</span>
+                                    </md-field>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Correo electrónico:</label>
+                                    <md-field>
+                                        <label>Por favor escriba acá su correo electrónico</label>
+                                        <md-input v-model="jsonFinal.correo"></md-input>
+                                        <span class="md-helper-text">Ejemplo: ejemplo@correo.com</span>
+                                    </md-field>
+                                </div>
+                                <br>
+                                <hr>
+                                <div>
+                                    <label>Por favor señale su nivel de estudios:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Básica incompleta">
+                                        <label>Básica incompleta</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Básica completa">
+                                        <label>Básica completa</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Media incompleta">
+                                        <label>Media incompleta</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Media completa">
+                                        <label>Media completa</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Técnico (o instituto profesional) incompleto">
+                                        <label>Técnico (o instituto profesional) incompleto</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Técnico (o instituto profesional) completo">
+                                        <label>Técnico (o instituto profesional) completo</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Universitario incompleto">
+                                        <label>Universitario incompleto</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Universitario completo">
+                                        <label>Universitario completo</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Estudios de postgrado incompleto">
+                                        <label>Estudios de postgrado incompleto</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Estudios de postgrado completo">
+                                        <label>Estudios de postgrado completo</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="Otro">
+                                        <label>Otro</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeEstudio" value="No sabe-No Responde">
+                                        <label>No sabe-No Responde</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su situación laboral:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Trabaja part time">
+                                        <label>Trabaja part time</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Trabaja full time">
+                                        <label>Trabaja full time</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Busca empleo">
+                                        <label>Busca empleo</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Dueña de Casa">
+                                        <label>Dueña de Casa</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Jubilado">
+                                        <label>Jubilado</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="Estudiante">
+                                        <label>Estudiante</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.situacionLaboral" value="No sabe-No Responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su nivel de ingresos:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Menos de 150.000">
+                                        <label>Menos de 150.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 150.001 y 250.000">
+                                        <label>Entre 150.001 y 250.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 250.001 y 450.000">
+                                        <label>Entre 250.001 y 450.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 450.001 y 750.000">
+                                        <label>Entre 450.001 y 750.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 750.001 y 1.000.000">
+                                        <label>Entre 750.001 y 1.000.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 1.000.001 y 1.500.000">
+                                        <label>Entre 1.000.001 y 1.500.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 1.500.001 y 2.000.000">
+                                        <label>Entre 1.500.001 y 2.000.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Entre 2.000.001 y 3.000.000">
+                                        <label>Entre 2.000.001 y 3.000.000</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="Más de 3.000.001">
+                                        <label>Más de 3.000.001</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.nivelDeIngreso" value="No sabe-No responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su género:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.genero" value="Masculino">
+                                        <label>Masculino</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.genero" value="Femenino">
+                                        <label>Femenino</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.genero" value="No binario">
+                                        <label>No binario</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su estado civil:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Casada(o)">
+                                        <label>Casada(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Soltera(o)">
+                                        <label>Soltera(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Divorciada(o) o Separada(o)">
+                                        <label>Divorciada(o) o Separada(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Viuda(o)">
+                                        <label>Viuda(o)</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="Otro">
+                                        <label>Otro</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.estadoCivil" value="No sabe-No responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
+                                <br>
+                                <div>
+                                    <label>Por favor señale su edad:</label>
+                                    <hr>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 18 y 24">
+                                        <label>Entre 18 y 24</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 25 y 34">
+                                        <label>Entre 25 y 34</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 35 y 44">
+                                        <label>Entre 35 y 44</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 45 y 54">
+                                        <label>Entre 45 y 54</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Entre 55 y 64">
+                                        <label>Entre 55 y 64</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="Mayor de 65">
+                                        <label>Mayor de 65</label>
+                                    </md-radio>
+                                    <md-radio v-model="jsonFinal.rangoDeEdad" value="No sabe-No responde">
+                                        <label>No sabe-No responde</label>
+                                    </md-radio>
+                                </div>
+                            </md-step>
+
+
+                            <md-step v-model="array" v-if="i>0" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
                                 <h1>{{datos[i].nombre}}</h1><br>
                                 <label>{{datos[i].descripcion}}</label>
                                 <br><label> Por favor, responda según su opinión</label>
@@ -463,13 +1007,13 @@
                 nivelDeEstudio: null,
                 situacionLaboral: null,
                 nivelDeIngreso: null,
-                sexo: null,
+                genero: null,
                 estadoCivil: null,
                 rangoDeEdad: null,
                 fecha: null,
                 idregion: null,
                 telefono: null,
-                tipoEncuesta: null,
+                tipoEncuesta: 1,
                 resultados: null
             },
             form3: [],
@@ -484,7 +1028,7 @@
                 fecha: null,
                 idregion: null,
                 telefono: null,
-                tipoEncuesta: null,
+                tipoEncuesta: 2,
                 resultados: null
             },
             array:[],

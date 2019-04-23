@@ -386,7 +386,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <md-button v-on:click="guardarRespuestas" class="md-raised md-primary; center">Enviar Respuestas</md-button>
+                                <md-button v-on:click="guardarRespuestaSentimiento" class="md-raised md-primary; center">Enviar Respuestas</md-button>
 
                             </md-step>
 
@@ -590,8 +590,6 @@
                         respuesta: [],
                         idcategoria: i+1
                     };
-                    console.log("este es el form2", this.form2)
-                    console.log("este es el json", json)
                     this.form2.push(json)
                 }
             },
@@ -604,8 +602,6 @@
                         respuesta: [],
                         idcategoria: i+1
                     };
-                    console.log("este es el form3", this.form3)
-                    console.log("este es el json", json)
                     this.form3.push(json)
                 }
             },
@@ -616,23 +612,37 @@
                 for(let i=0; i<this.form3.length; i++){
                     let numero = this.form3[i].respuesta;
                     this.form3[i].respuesta = [];
-                    console.log("lo hareeeeee:", this.datos[i].preguntas.length)
+                    console.log("lo hareeeeee:", this.datos[i].preguntas.length);
                     for (let j=0; j<this.datos[i].preguntas.length; j++) {
                         this.form3[i].respuesta.push(numero)
                     }
                 }
-                this.form3.shift()
+                this.form3.shift();
                 console.log("lo que obtengo es;", this.form3)
             },
 
             guardarRespuestas(){
-                this.jsonFinal.resultados = this.form2
-//                this.jsonFinalSentimiento.resultados = this.form3
-                this.multiplicarRespuestas()
-                console.log("multiplicacion de respuestas", this.form3)
-                console.log("json final", this.jsonFinal)
-                console.log(this.form2);
-                console.log(this.form3)
+                this.form2.shift();
+                this.jsonFinal.resultados = this.form2;
+                console.log("el json final es:", this.jsonFinal)
+                this.$http.post('http://localhost:8092/encuestados',JSON.stringify(this.jsonFinal)).then((response) => {
+                    console.log("Se hizo el post",response);
+                }, (response) =>{
+                    console.log("No se logro el post",response)
+                });
+
+            },
+
+            guardarRespuestaSentimiento(){
+                this.multiplicarRespuestas();
+                this.jsonFinalSentimiento.resultados = this.form3
+                console.log("el json final es:", this.jsonFinalSentimiento)
+                this.$http.post('http://localhost:8092/encuestados',JSON.stringify(this.jsonFinalSentimiento)).then((response) => {
+                    console.log("Se hizo el post",response);
+                }, (response) =>{
+                    console.log("No se logro el post",response)
+                });
+
             }
         }
     }

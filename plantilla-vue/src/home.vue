@@ -158,7 +158,7 @@
             </md-tab>
 
             <md-tab id="tab-favorites" md-label="Responder encuesta" to="/components/tabs/favorites">
-
+                <md-progress-spinner v-if="mostrarSpinner" :md-value="progressSpinner" md-mode="indeterminate"></md-progress-spinner>
                 <div v-if="mostrarOpciones" style="width: 100%; height: 100%">
                     <md-card style="float: left">
                         <img src="../src/img/logo.png"/>
@@ -496,6 +496,8 @@
             mostrar1: false,
             mostrar2: false,
             mostrar3: false,
+            progressSpinner: 0,
+            mostrarSpinner: true,
             listaDescripciones: ["Podría ser definida como aquellas estructuras y procesos mentales relacionados con el pensamiento, comprensión, e interpretación de estímulos y eventos. Esto incluye los acontecimientos, significados y creencias que se han desarrollado en los turistas y/o visitantes a partir de sus experiencias y que se almacenan en la memoria.",
                                   "Es reactiva, es incontrolable en forma directa, se manifiesta a través de expresiones físicas, es fácil de estimular y puede ser aprendida. La respuesta afectiva es reactiva dado que no es una condición planificada ni intencional, por el contrario, el turista responde a factores ambientales que para él son relevantes, por ejemplo, un atardecer a la orilla de un lago.",
                                 "Es una experiencia en múltiples modalidades sensoriales como los gustos, los sonidos, los olores, las impresiones táctiles y las imágenes visuales. Los individuos no sólo responden a las impresiones multisensoriales de los estímulos externos (por ejemplo, una estadía en el desierto bajo una noche estrellada) mediante la codificación de estos insumos sensoriales, sino que también reaccionan mediante la generación de imágenes multisensoriales dentro de sí mismos.",
@@ -507,9 +509,17 @@
         created() {
         },
         mounted(){
+            this.progressSpinner += 15;
             this.cantidad();
+
+            console.log("llegue aca1", this.progressSpinner)
+            this.progressSpinner +=25;
             this.cantidadSentimiento();
+            this.progressSpinner +=75;
+            this.mostrarSpinner = false;
+            console.log("llegue aca2", this.progressSpinner)
             this.cambiarPregunta();
+
 
         },
         methods:{
@@ -601,17 +611,18 @@
             },
 
             multiplicarRespuestas(){
-              for (let i=1; i<this.datos.length; i++){
-                  let cantidad = this.datos[i].preguntas.length
-                  let numero = this.form3[i].respuesta
-                  console.log("la respuesta es", this.form3.respuesta)
-                  this.form3.respuesta = []
-                  for (let j=0; j<cantidad; j++){
-                      this.form3.respuesta.push(numero)
-                  }
-                  console.log("asiii quedeeee", this.form3)
+                console.log("this.form3", this.form3);
 
-              }
+                for(let i=0; i<this.form3.length; i++){
+                    let numero = this.form3[i].respuesta;
+                    this.form3[i].respuesta = [];
+                    console.log("lo hareeeeee:", this.datos[i].preguntas.length)
+                    for (let j=0; j<this.datos[i].preguntas.length; j++) {
+                        this.form3[i].respuesta.push(numero)
+                    }
+                }
+                this.form3.shift()
+                console.log("lo que obtengo es;", this.form3)
             },
 
             guardarRespuestas(){

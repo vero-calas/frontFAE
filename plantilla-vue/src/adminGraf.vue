@@ -320,7 +320,7 @@
                 };
 
                 //servicio de envio del json
-                console.log("el json que quiero enviar es:", json);
+                //console.log("el json que quiero enviar es:", json);
                 /*
                 this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json), auth).then(response => {
                    console.log("entre")
@@ -334,9 +334,44 @@
             },
 
             cambiarMes(mes){
-
-                if(mes === "Dec"){
-                    return 12
+                if(mes === "Jan"){
+                    return "01"
+                }
+                else if(mes === "Feb"){
+                    return "02"
+                }
+                else if(mes === "Mar"){
+                    return "03"
+                }
+                else if(mes === "Apr"){
+                    return "04"
+                }
+                else if(mes === "May"){
+                    return "05"
+                }
+                else if(mes === "Jun"){
+                    return "06"
+                }
+                else if(mes === "Jul"){
+                    return "07"
+                }
+                else if(mes === "Aug"){
+                    return "08"
+                }
+                else if(mes === "Sep"){
+                    return "9"
+                }
+                else if(mes === "Oct"){
+                    return "10"
+                }
+                else if(mes === "Nov"){
+                    return "11"
+                }
+                else if(mes === "Dec"){
+                    return "12"
+                }
+                else {
+                    console.log("error leyendo el mes")
                 }
 
             },
@@ -348,37 +383,39 @@
                     //declaracion del json
 
                     let fechaInicio = this.selectedInitial + '';
+                    let fechaInicioSplit = fechaInicio.split(" ");
+                    let fechaInicioServFinal =  fechaInicioSplit[3] + "-" + this.cambiarMes(fechaInicioSplit[1]) + "-" + fechaInicioSplit[2] + "T00:00:00.000+0000";
                     let fechaFinal = this.selectedFinal + '';
                     let fechaFinSplit = fechaFinal.split(" ");
-                    let fechaServFinal =  fechaFinSplit[3] + "-" + this.cambiarMes(fechaFinSplit[1]) + "-" + fechaFinSplit[2] + "T02:59:59.000+0000";
+                    let fechaServFinal =  fechaFinSplit[3] + "-" + this.cambiarMes(fechaFinSplit[1]) + "-" + fechaFinSplit[2] + "T23:59:59.000+0000";
                     console.log("la fecha queda configurada como:", fechaServFinal);
                     let json = {
                         "categoria_id": this.categoria,
                         "tipoEncuesta": this.tipoDeEncuesta,
                         "region_id": this.region,
-                        "fechaInicial": fechaInicio,
+                        "fechaInicial": fechaInicioServFinal,
                         "fechaFinal": fechaServFinal
                     };
 
                     //servicio de envio del json
                     console.log("el json que quiero enviar es:", json);
-                    /*
-                    this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json)).then(response => {
+                    const auth = {
+                        headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiJDJhJDEwJGtsblN6Tm9oNHF5M1RQOS9scXhCN3VpdmdQeG9XTVZNZ2F0eVIwb0taVC4vRnl2Qi42S0RLIiwicm9sIjoxLCJjb3JyZW8iOiJhZG1pbkBtYWlsLmNsIiwiYWN0aXZvIjp0cnVlfQ.g78PzR0At1xVkHqXYPIVJmHWmF8YHmtQu6nXG8AoEnU'}
+                    };
+                    this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json), auth).then(response => {
                         this.dataGr = response.data;
                         console.log('data de grafico obtenido es:', this.dataGr);
                     }, (response) => {
                         console.log('no obtiene data grafico');
-                        this.error = true;
                     });
-                    this.crearGrafico();
-                    */
+                    //this.crearGrafico();
                 }
 
                 else {
                     //declaracion del json para SD
                     console.log("las fechas son: ", this.selectedInitial.split(" "), this.selectedFinal);
-                    let fechaInicio = this.selectedInitial + "T02:59:59.000+0000";
-                    let fechaFin = this.selectedFinal + "T03:00:00.000+0000";
+                    let fechaInicio = this.selectedInitial + "T23:59:59.000+0000";
+                    let fechaFin = this.selectedFinal + "T00:00:00.000+0000";
 
                     let json2 = {
                         "categoria_id": this.categoria,
@@ -391,7 +428,7 @@
 
                     //servicio para SD
                     console.log("el json que quiero enviar es,", json2);
-                    /*
+
                     this.$http.post('http://localhost:8092/encuestados/graphicsSD', JSON.stringify(json2)).then(response => {
                         this.dataGr = response.data;
                         console.log('data de graficoSD obtenido es:', this.dataGr);
@@ -399,30 +436,16 @@
                         console.log('no obtiene data graficoSD');
                         this.error = true;
                     });
-*/
-                    this.crearGrafico();
+
+                   // this.crearGrafico();
                 }
                // this.crearGrafico();
             },
 
 
             crearGrafico(){
-                 this.pieData = {
-                    labels: ["Aprobados", "Desaprobados", "Neutro"],
-                    datasets: [
-                        {
-                            //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
-                            data: [20, 120, 30],
-                            label: ["Puntuación alcanzada"],
-                            backgroundColor: [
-                                '#D4E157',
-                                '#e15545',
-                                '#fbe246'
-                                ],
-                        },
-
-                    ]
-                };
+                this.llamarServicio()
+                 this.pieData = {};
                  this.showd=true
             }
         }

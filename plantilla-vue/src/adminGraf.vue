@@ -3,64 +3,7 @@
     <div>
         <md-tabs md-sync-route class="md-transparent" md-alignment="fixed">
            <md-tab id="tab-general" md-label="General" to="/components/tabs/generalGraf">
-               <md-card style="width: 40%; float: left">
-                   <md-card-header>
-                       <div class="md-title">Gráfico 1:</div>
-                   </md-card-header>
-                   <md-card-media>
-                       <div>
-                           <vue-chart  v-if="this.dataFija1 !== null" type="pie" :data="this.dataFija1"></vue-chart>
-                           <div v-else>
-                               <div class=" lds-css ng-scope">
-                               </div>
-                           </div>
-                       </div>
-                   </md-card-media>
-               </md-card>
-           <br>
-               <md-card style="width: 40%; float: right">
-                   <md-card-header>
-                       <div class="md-title">Gráfico 2:</div>
-                   </md-card-header>
-                   <md-card-media>
-                       <div>
-                           <vue-chart  v-if="this.dataFija2 !== null" type="pie" :data="this.dataFija2"></vue-chart>
-                           <div v-else>
-                               <div class=" lds-css ng-scope">
-                               </div>
-                           </div>
-                       </div>
-                   </md-card-media>
-               </md-card>
-               <br>
-               <md-card style="width: 40%; float: left">
-                   <md-card-header>
-                       <div class="md-title">Gráfico 3:</div>
-                   </md-card-header>
-                   <md-card-media>
-                       <div>
-                           <vue-chart  v-if="this.dataFija3 !== null" type="pie" :data="this.dataFija3"></vue-chart>
-                           <div v-else>
-                               <div class=" lds-css ng-scope">
-                               </div>
-                           </div>
-                       </div>
-                   </md-card-media>
-               </md-card>
-               <br>
-               <md-card style="width: 40%; float: right">
-                   <md-card-header>
-                       <div class="md-title">Gráfico 4:</div>
-                   </md-card-header>
-                   <md-card-media>
-                       <div>
-                           <vue-chart  v-if="this.dataFija4 !== null" type="pie" :data="this.dataFija4"></vue-chart>
-                           <div v-else>
-                               <div class=" lds-css ng-scope">
-                               </div>
-                           </div>
-                       </div>
-                   </md-card-media>
+              <md-card>
                </md-card>
            </md-tab>
 
@@ -92,6 +35,7 @@
                                 <div class="md-layout-item">
                             <md-field>
                                 <md-select v-model="variableSD" name="variableSD" id="variableSD">
+                                    <md-option value="">Ninguna</md-option>
                                     <md-option value="nivel de estudios">Nivel de estudios</md-option>
                                     <md-option value="situacion laboral">Situacion Laboral</md-option>
                                     <md-option value="nivel de ingresos">Nivel de Ingresos</md-option>
@@ -201,6 +145,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div v-if="this.showdBar">
+                            <vue-chart  v-if="this.barData !== null" type="horizontalBar" :data="this.barData"></vue-chart>
+                            <div v-else>
+                                <div class=" lds-css ng-scope">
+                                </div>
+                            </div>
+                        </div>
                     </md-card-media>
                 </md-card>
 </div>
@@ -232,93 +183,18 @@
             dataGrSD: null,
             error: false,
             pieData: null,
+            barData: null,
             showd: null,
+            showdBar: null,
             mostrar: false,
-            dataFija1: {
-                labels: ["Aprobados", "Desaprobados", "Neutro"],
-                datasets: [
-                    {
-                        //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
-                        data: [100, 20, 30],
-                        label: ["Puntuación alcanzada"],
-                        backgroundColor: [
-                            '#D4E157',
-                            '#e15545',
-                            '#fbe246'
-                        ],
-                    },
-
-                ]
-            },
-            dataFija2: {
-                labels: ["Aprobados", "Desaprobados", "Neutro"],
-                datasets: [
-                    {
-                        //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
-                        data: [40, 40, 40],
-                        label: ["Puntuación alcanzada"],
-                        backgroundColor: [
-                            '#D4E157',
-                            '#e15545',
-                            '#fbe246'
-                        ],
-                    },
-
-                ]
-            },
-            dataFija3: {
-                labels: ["Aprobados", "Desaprobados", "Neutro"],
-                datasets: [
-                    {
-                        //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
-                        data: [20, 0, 30],
-                        label: ["Puntuación alcanzada"],
-                        backgroundColor: [
-                            '#D4E157',
-                            '#e15545',
-                            '#fbe246'
-                        ],
-                    },
-
-                ]
-            },
-            dataFija4: {
-                labels: ["Aprobados", "Desaprobados", "Neutro"],
-                datasets: [
-                    {
-                        //data: [this.DataGr.Aprobados, this.DataGr.Rechazados, this.DataGr.Neutro],
-                        data: [30, 30, 90],
-                        label: ["Puntuación alcanzada"],
-                        backgroundColor: [
-                            '#D4E157',
-                            '#e15545',
-                            '#fbe246'
-                        ],
-                    },
-
-                ]
-            }
         }),
 
         created() {
-            this.graficoInicial();
-            //this.crearGrafico();
         },
 
         methods: {
 
             graficoInicial(){
-                const auth = {
-                    headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiJDJhJDEwJGtsblN6Tm9oNHF5M1RQOS9scXhCN3VpdmdQeG9XTVZNZ2F0eVIwb0taVC4vRnl2Qi42S0RLIiwicm9sIjoxLCJjb3JyZW8iOiJhZG1pbkBtYWlsLmNsIiwiYWN0aXZvIjp0cnVlfQ.g78PzR0At1xVkHqXYPIVJmHWmF8YHmtQu6nXG8AoEnU'}
-                };
-                let json = {
-                    "categoria_id": 2,
-                    "tipoEncuesta": 1,
-                    "region_id": 1,
-                    "fechaInicial": "2018-08-27T23:59:59.000+0000",
-                    "fechaFinal": "2018-09-01T00:00:00.000+0000"
-                };
-
             },
 
             cambiarMes(mes){
@@ -393,10 +269,11 @@
                     this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json), auth).then(response => {
                         this.dataGr = response.data;
                         console.log('data de grafico obtenido es:', this.dataGr);
+                        this.grafico(this.dataGr)
                     }, (response) => {
                         console.log('no obtiene data grafico');
                     });
-                    //this.crearGrafico();
+
                 }
 
                 else {
@@ -423,23 +300,83 @@
                         headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiJDJhJDEwJGtsblN6Tm9oNHF5M1RQOS9scXhCN3VpdmdQeG9XTVZNZ2F0eVIwb0taVC4vRnl2Qi42S0RLIiwicm9sIjoxLCJjb3JyZW8iOiJhZG1pbkBtYWlsLmNsIiwiYWN0aXZvIjp0cnVlfQ.g78PzR0At1xVkHqXYPIVJmHWmF8YHmtQu6nXG8AoEnU'}
                     };
                     this.$http.post('http://localhost:8092/encuestados/graphicsSD', JSON.stringify(json2), auth).then(response => {
-                        this.dataGr = response.data;
+                        this.dataGrSD = response.data;
                         console.log('data de graficoSD obtenido es:', this.dataGr);
+                        this.graficoBar(this.dataGrSD);
                     }, (response) => {
                         console.log('no obtiene data graficoSD');
                         this.error = true;
                     });
-
-                   // this.crearGrafico();
                 }
                // this.crearGrafico();
             },
 
+            grafico(dataServicio){
+                console.log("dataGR vale", this.dataGr)
+                if (dataServicio != null) {
+                    console.log("entre")
+                    this.pieData = {
+                        labels: ["Aprobados", "Desaprobados", "Neutro"],
+                        datasets: [
+                            {
+                                data: [dataServicio.Aprobados, dataServicio.Rechazados , dataServicio.Neutro],
+                                label: ["Puntuación alcanzada"],
+                                backgroundColor: [
+                                    '#D4E157',
+                                    '#e15545',
+                                    '#fbe246'
+                                ],
+                            },
 
-            crearGrafico(){
-                this.llamarServicio()
-                 this.pieData = {};
-                 this.showd=true
+                        ]
+                    };
+                    this.showd = true
+                }
+                else if (this.dataGrSD != null){
+
+                }
+                else {
+                    console.log("ambos son nulos")
+                }
+            },
+
+            graficoBar(barServicio){
+                console.log("dataGrSD vale", this.dataGrSD)
+                if (barServicio != null) {
+                    console.log("entre")
+                    this.barData = {
+                        labels: ["Aprobados", "Desaprobados", "Neutro"],
+                        datasets: []
+                    };
+                    let datasetAux = {
+                            data: [barServicio.Aprobados, barServicio.Rechazados , barServicio.Neutro],
+                            label: [],
+                            backgroundColor: [
+                                '#D4E157',
+                                '#e15545',
+                                '#fbe246'
+                            ],
+                        };
+                    console.log("el largo de barservicio es", barServicio.length)
+                    console.log("barServicioooooo", barServicio)
+                    console.log("barservicio[i]", barServicio[0])
+                    for (let i=0; i<barServicio.length; i++){
+                        console.log("el label ", barServicio[i])
+                        this.barData.datasets.push(datasetAux)
+                        this.barData.datasets[i].label.push(barServicio[i]) //label de variable sd
+                    }
+                    this.showdBar = true
+                }
+                else {
+                    console.log("ambos son nulos")
+                }
+            },
+
+            crearGrafico() {
+                this.llamarServicio();
+                console.log("voy a graficar")
+                console.log("la dataGR es: ", this.dataGr)
+
             }
         }
     }

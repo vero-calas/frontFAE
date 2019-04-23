@@ -319,18 +319,6 @@
                     "fechaFinal": "2018-09-01T00:00:00.000+0000"
                 };
 
-                //servicio de envio del json
-                //console.log("el json que quiero enviar es:", json);
-                /*
-                this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json), auth).then(response => {
-                   console.log("entre")
-                    this.dataGr = response.data;
-                    console.log('data de grafico obtenido es:', this.dataGr);
-                }, (response) => {
-                    console.log('no obtiene data grafico');
-                    this.error = true;
-                });
-                */
             },
 
             cambiarMes(mes){
@@ -413,23 +401,28 @@
 
                 else {
                     //declaracion del json para SD
-                    console.log("las fechas son: ", this.selectedInitial.split(" "), this.selectedFinal);
-                    let fechaInicio = this.selectedInitial + "T23:59:59.000+0000";
-                    let fechaFin = this.selectedFinal + "T00:00:00.000+0000";
+                    let fechaInicio = this.selectedInitial + '';
+                    let fechaInicioSplit = fechaInicio.split(" ");
+                    let fechaInicioServFinal =  fechaInicioSplit[3] + "-" + this.cambiarMes(fechaInicioSplit[1]) + "-" + fechaInicioSplit[2] + "T00:00:00.000+0000";
+                    let fechaFinal = this.selectedFinal + '';
+                    let fechaFinSplit = fechaFinal.split(" ");
+                    let fechaServFinal =  fechaFinSplit[3] + "-" + this.cambiarMes(fechaFinSplit[1]) + "-" + fechaFinSplit[2] + "T23:59:59.000+0000";
 
                     let json2 = {
                         "categoria_id": this.categoria,
                         "tipoEncuesta": this.tipoDeEncuesta,
                         "region_id": this.region,
                         "variableSD": this.variableSD,
-                        "fechaInicial": fechaInicio,
-                        "fechaFinal": fechaFin
+                        "fechaInicial": fechaInicioServFinal,
+                        "fechaFinal": fechaServFinal
                     };
 
                     //servicio para SD
                     console.log("el json que quiero enviar es,", json2);
-
-                    this.$http.post('http://localhost:8092/encuestados/graphicsSD', JSON.stringify(json2)).then(response => {
+                    const auth = {
+                        headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiJDJhJDEwJGtsblN6Tm9oNHF5M1RQOS9scXhCN3VpdmdQeG9XTVZNZ2F0eVIwb0taVC4vRnl2Qi42S0RLIiwicm9sIjoxLCJjb3JyZW8iOiJhZG1pbkBtYWlsLmNsIiwiYWN0aXZvIjp0cnVlfQ.g78PzR0At1xVkHqXYPIVJmHWmF8YHmtQu6nXG8AoEnU'}
+                    };
+                    this.$http.post('http://localhost:8092/encuestados/graphicsSD', JSON.stringify(json2), auth).then(response => {
                         this.dataGr = response.data;
                         console.log('data de graficoSD obtenido es:', this.dataGr);
                     }, (response) => {

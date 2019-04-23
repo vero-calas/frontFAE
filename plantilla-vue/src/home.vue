@@ -375,12 +375,13 @@
                                                 sentiment_very_dissatisfied
                                             </md-icon><br>
 
-                                            <md-radio v-model=form3[i] v-for="n in 7" :value="n">
+                                            <md-radio v-model=form3[i].respuesta v-for="n in 7" :value="n">
                                                 <label>
                                                     {{n}}
                                                 </label>
                                             </md-radio>
-                                            {{form3}}
+                                          form3:  {{form3}}
+                                          form3[i]:  {{form3[i]}}
 
                                         </div>
                                     </div>
@@ -577,7 +578,7 @@
                 for (let i=0; i<this.cantidadCategoria ; i++){
                     let json ={
                         respuesta: [],
-                        idcategoria: i
+                        idcategoria: i+1
                     };
                     console.log("este es el form2", this.form2)
                     console.log("este es el json", json)
@@ -591,7 +592,7 @@
                 for (let i=0; i<this.cantidadCategoria; i++){
                     let json ={
                         respuesta: [],
-                        idcategoria: i
+                        idcategoria: i+1
                     };
                     console.log("este es el form3", this.form3)
                     console.log("este es el json", json)
@@ -599,9 +600,25 @@
                 }
             },
 
+            multiplicarRespuestas(){
+              for (let i=1; i<this.datos.length; i++){
+                  let cantidad = this.datos[i].preguntas.length
+                  let numero = this.form3[i].respuesta
+                  console.log("la respuesta es", this.form3.respuesta)
+                  this.form3.respuesta = []
+                  for (let j=0; j<cantidad; j++){
+                      this.form3.respuesta.push(numero)
+                  }
+                  console.log("asiii quedeeee", this.form3)
+
+              }
+            },
+
             guardarRespuestas(){
                 this.jsonFinal.resultados = this.form2
 //                this.jsonFinalSentimiento.resultados = this.form3
+                this.multiplicarRespuestas()
+                console.log("multiplicacion de respuestas", this.form3)
                 console.log("json final", this.jsonFinal)
                 console.log(this.form2);
                 console.log(this.form3)

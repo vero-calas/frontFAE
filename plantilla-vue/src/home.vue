@@ -14,14 +14,14 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active" >
-                                    <img class="d-block w-100" src="https://www.wendywutours.co.uk/resource/upload/230/countrychile.jpg" alt="grafico" style="width: 200px; height:700px; margin: 0 auto">
+                                    <img class="d-block w-100" src="../src/img/norte.jpg" alt="grafico" style="width: 200px; height:700px; margin: 0 auto">
                                     <div class="carousel-caption">
                                         <h2>Norte</h2>
                                         <h3>Visita el norte de Chile</h3>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="d-block w-100" src="http://www.educacionadventista.com/wp-content/uploads/2017/08/Chile-1920x600.jpg" alt="mapas" style="width: 200px; height:700px; margin: 0 auto">
+                                    <img class="d-block w-100" src="../src/img/centro.jpg" alt="mapas" style="width: 200px; height:700px; margin: 0 auto">
                                     <div class="carousel-caption">
                                         <h2>Centro</h2>
                                         <h3>
@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="d-block w-100" src="https://www.wendywutours.com.au/resource/upload/1638/chile-top-toe-banner.jpg" alt="grafo" style="width: 200px; height:700px; margin: 0 auto">
+                                    <img class="d-block w-100" src="../src/img/sur.jpg" alt="grafo" style="width: 200px; height:700px; margin: 0 auto">
                                     <div class="carousel-caption">
                                         <h2>Sur</h2>
                                         <h3>Visita el sur de Chile
@@ -186,7 +186,7 @@
                     <div>
                         <!-- opciones  md-vertical, md-horizontal, md-alternative-->
 
-                        <md-steppers md-horizontal>
+                        <md-steppers md-vertical>
                             <!--                          ENCUESTA DE Turismo                                        -->
                             <!--                          **************************                                       -->
                             <md-step id="0">
@@ -444,7 +444,7 @@
                     <div>
                         <!-- opciones  md-vertical, md-horizontal, md-alternative-->
 
-                        <md-steppers md-horizontal>
+                        <md-steppers md-vertical>
 
 
                             <!--                          ENCUESTA DE Turismo RESUMIDA                                       -->
@@ -726,7 +726,7 @@
                     <div>
                         <!-- opciones  md-vertical, md-horizontal, md-alternative-->
 
-                        <md-steppers md-horizontal>
+                        <md-steppers md-vertical>
 
 
                             <!--                          SEGUNDA ETAPA DE ENCUESTA                                        -->
@@ -1069,7 +1069,7 @@
         methods:{
 
             cambiarPregunta(entrada){
-                this.$http.get('http://localhost:8092/categories/all').then(response => {
+                this.$http.get('http://134.209.49.245:8080/mongodb-v1/categories/all').then(response => {
                     this.empresa = response.data;
                     console.log('data de regiones obtenido es:', this.empresa);
                 }, (response) => {
@@ -1169,7 +1169,7 @@
                 this.form2.shift();
                 this.jsonFinal.resultados = this.form2;
                 console.log("el json final es:", this.jsonFinal)
-                this.$http.post('http://localhost:8092/encuestados',JSON.stringify(this.jsonFinal)).then((response) => {
+                this.$http.post('http://134.209.49.245:8080/mongodb-v1/encuestados',JSON.stringify(this.jsonFinal)).then((response) => {
                     console.log("Se hizo el post",response);
                 }, (response) =>{
                     console.log("No se logro el post",response)
@@ -1181,7 +1181,7 @@
                 this.multiplicarRespuestas();
                 this.jsonFinalSentimiento.resultados = this.form3
                 console.log("el json final es:", this.jsonFinalSentimiento)
-                this.$http.post('http://localhost:8092/encuestados',JSON.stringify(this.jsonFinalSentimiento)).then((response) => {
+                this.$http.post('http://134.209.49.245:8080/mongodb-v1/encuestados',JSON.stringify(this.jsonFinalSentimiento)).then((response) => {
                     console.log("Se hizo el post",response);
                 }, (response) =>{
                     console.log("No se logro el post",response)

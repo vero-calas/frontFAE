@@ -35,10 +35,8 @@
                 <div class="list-group" v-if="this.role === 0">
                     <a v-on:click="setSelectedItemHome" href="#" class="list-group-item"><label class="labelSide">Home</label><md-icon class="position">home</md-icon></a>
                     <a v-on:click="setSelectedItemAdminView" href="#" class="list-group-item"><label class="labelSide">Estadísticas generales</label><md-icon class="position">local_play</md-icon></a>
-                    <a v-on:click="setSelectedItemAdminEdit" href="#" class="list-group-item"><label class="labelSide">Editar encuesta general</label><md-icon class="position">local_play</md-icon></a>
-                    <a v-on:click="setSelectedItemAdminView2" href="#" class="list-group-item"><label class="labelSide">Estadísticas de sentimiento</label><md-icon class="position">local_play</md-icon></a>
-                    <a v-on:click="setSelectedItemAdminEdit2" href="#" class="list-group-item"><label class="labelSide">Editar encuesta de sentimiento</label><md-icon class="position">local_play</md-icon></a>
-                    <a v-on:click="setSelectedItemEmpresaInfo" href="#" class="list-group-item"><label class="labelSide">Mi perfil</label><md-icon class="position">local_play</md-icon></a>
+                    <a v-on:click="setSelectedItemAdminEdit" href="#" class="list-group-item"><label class="labelSide">Editar encuesta</label><md-icon class="position">local_play</md-icon></a>
+                   <a v-on:click="setSelectedItemEmpresaInfo" href="#" class="list-group-item"><label class="labelSide">Mi perfil</label><md-icon class="position">local_play</md-icon></a>
                 </div>
             </md-app-drawer>
 
@@ -125,8 +123,8 @@
         data: () => ({
             load: 0,
             //role 0 = admin; role 1 = empresa; role 2 = usuario natural
-            role: Number(localStorage.getItem('role'))-1,
-           // role: 0,
+            //role: Number(localStorage.getItem('role'))-1,
+            role: 0,
             error:false,
             showDialogLogin: false,
             showDialogRegister: false,
@@ -162,19 +160,23 @@
         created() {
             const auth = {
                 headers: {'Authorization':'Bearer ' + localStorage.getItem('authtoken')}
-            }
-            /*
-            this.$http.get('http://localhost:8092/categories/all',auth).then(response => {
+            };
+
+            let roleAdmin ={
+                headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiYXNkZiIsInJvbCI6MSwiY29ycmVvIjoiYWRtaW5AbWFpbC5jbCIsImFjdGl2byI6dHJ1ZX0.TrVdJeaJ5km92RKv2hI0yot8gWwtON3azO1qPvfdjZ0'}
+            };
+
+            this.$http.get('http://134.209.49.245:8080/mongodb-v1/categories/all',auth).then(response => {
                 this.preguntas = response.data;
-                console.log('data de regiones obtenido es:', this.preguntas);
+                console.log('data de preguntas obtenido es:', this.preguntas);
                 this.eleccion = 1;
                 this.load += 33
             }, (response) => {
                 this.error = true;
-                console.log('no obtiene regiones');
+                console.log('no obtiene preguntas');
             });
 
-            this.$http.get('http://localhost:8092/regiones/all',auth).then(response => {
+            this.$http.get('http://134.209.49.245:8080/mongodb-v1/regiones/all',auth).then(response => {
                 this.regiones = response.data;
                 console.log('data de regiones obtenido es:', this.regiones);
                 this.eleccion = 1;
@@ -183,7 +185,7 @@
                 this.error = true;
                 console.log('no obtiene regiones');
             });
-            this.$http.get('http://localhost:8092/usuarios/all',auth).then(response => {
+            this.$http.get('http://134.209.49.245:8080/mongodb-v1/usuarios/all', roleAdmin).then(response => {
                 this.usuarios = response.data;
                 console.log('data de usuarios obtenido es:', this.usuarios);
                 this.eleccion = 1;
@@ -192,7 +194,7 @@
                 this.error = true;
                 console.log('no obtiene usuarios');
             });
-            this.$http.get('http://localhost:8092/encuestados/all',auth).then(response => {
+            this.$http.get('http://134.209.49.245:8080/mongodb-v1/encuestados/all', roleAdmin).then(response => {
                 this.encuestados = response.data;
                 console.log('data de encuestados obtenido es:', this.encuestados);
                 this.eleccion = 1;
@@ -201,14 +203,7 @@
                 this.error = true;
                 console.log('no obtiene encuestados');
             });
-            this.$http.get('http://localhost:8092/usuarios/name/d',auth).then(response => {
-                this.usuariosE = response.data;
-                console.log('data de usuario d obtenido es:', this.usuariosE);
-                this.eleccion = 1;
-            }, (response) => {
-                console.log('no obtiene usuarios d');
-                this.error = true;
-            });
+
             setInterval(function(){
                 var hours = 1;
                 var now = new Date().getTime();
@@ -216,7 +211,7 @@
                 if(now-lstime > hours*60*60*1000){
                     localStorage.clear();
                 } }, 5*60*1000);
-                */
+
         },
 
         methods: {
@@ -248,8 +243,8 @@
                     correo: this.email,
                     contrasena: this.password
                 }
-                /*
-                this.$http.post('http://localhost:8092/usuarios/login',JSON.stringify(this.loginjson),config).then((response) => {
+
+                this.$http.post('http://134.209.49.245:8080/mongodb-v1/usuarios/login',JSON.stringify(this.loginjson),config).then((response) => {
                     localStorage.setItem('authtoken',response.body.Authorization);
                     localStorage.setItem('name',response.body.nombre);
                     localStorage.setItem('role',response.body.rol);
@@ -258,7 +253,7 @@
                 }, (response) =>{
                     console.log("No se logro el login",response)
                 });
-                */
+
             },
             servicioLogout(){
                 localStorage.clear();

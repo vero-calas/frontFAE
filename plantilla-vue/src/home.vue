@@ -199,7 +199,7 @@
                             </md-step>
 
 
-                            <md-step id="1">
+                            <md-step id="1" md-label="Datos personales">
                                 <div>
                                     <h1>Datos personales</h1>
                                     <label>Por favor seleccione la región a evaluar:</label>
@@ -413,7 +413,7 @@
                                 </div>
                             </md-step>
 
-                            <md-step v-model="array" v-if="i>0" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
+                            <md-step v-model="array" v-if="i>0" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id" :md-label="datos[i].nombre">
                                 <h1>{{datos[i].nombre}}</h1><br>
                                 <label>{{datos[i].descripcion}}</label>
                                 <br><label> Por favor, responda según su opinión</label>
@@ -457,7 +457,7 @@
                                 <md-button v-on:click="backButton">Atrás</md-button>
                             </md-step>
 
-                            <md-step id="1">
+                            <md-step id="1" md-label="Datos personales">
                                 <div>
                                     <h1>Datos personales</h1>
                                     <label>Por favor seleccione la región a evaluar:</label>
@@ -672,7 +672,7 @@
                             </md-step>
 
 
-                            <md-step v-model="array" v-if="i>0" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
+                            <md-step md-label= "datos[i].nombre" v-model="array" v-if="i>0" :key="i" :value="i" v-for="(categoria,i) in datos" :id="datos[i].id">
                                 <h1>{{datos[i].nombre}}</h1><br>
                                 <label>{{datos[i].descripcion}}</label>
                                 <br><label> Por favor, responda según su opinión</label>
@@ -1063,7 +1063,6 @@
             this.mostrarSpinner = false;
             console.log("llegue aca2", this.progressSpinner)
             this.cambiarPregunta();
-
 
         },
         methods:{

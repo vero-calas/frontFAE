@@ -8,6 +8,8 @@
     <label>Escriba el nombre de la empresa de Marketing que desea encuestar:</label>
     <md-field v-model="empresa"></md-field>
 
+    <md-button>Guardar</md-button>
+
 </md-card>
             </md-tab>
 
@@ -48,7 +50,7 @@
                         <div class="md-title"> Busca un usuario específico: </div>
                     </md-card-header>
 
-                    <md-card-media>
+                    <md-card-media style="margin: inherit">
                         <label>Buscar por el nombre:</label>
                         <br>
                         <md-field>
@@ -97,7 +99,7 @@
                     </md-card-header>
                     <br>
                     <hr>
-                    <md-card-media>
+                    <md-card-media  style="margin: inherit">
                         <label>Nombre:</label>
                         <md-field>
                             <label>Ingrese el nombre de la categoría</label>
@@ -196,17 +198,20 @@
                 <md-card-header>
                     <div class="md-title"> Categorías: </div>
                 </md-card-header>
+                <md-card-media style="margin: inherit;">
                 <div v-for="categoria in dataPreguntas">
                     <label>-Numeración de la categoría: {{categoria.ID}}<br>
                         -Nombre de la categoría: {{categoria.nombre}}<br>
                         <md-button  class="md-raised md-accent">Eliminar</md-button> </label>
                     <hr>
                 </div>
+                </md-card-media>
             </md-card>
             <md-card style="width: 68%; float: right">
                 <md-card-header>
                     <div class="md-title"> Edición de categorías: </div>
                 </md-card-header>
+                <md-card-media style="margin: inherit">
                 <br>
                 <label>Seleccione la categoría que desea editar:</label>
                 <select>
@@ -229,7 +234,7 @@
                         <md-textarea v-model="nuevaDescripcion" md-autogrow></md-textarea>
                     </md-field>
                 </div>
-
+                </md-card-media>
             </md-card>
 
         </md-tab>
@@ -284,8 +289,8 @@ empresa: null,
         methods : {
 
             crearJSON() {
-                let preguntass = []
-                console.log("cantidad de preguntas", this.cantPreguntas)
+                let preguntass = [];
+                console.log("cantidad de preguntas", this.cantPreguntas);
                 for (let i = 0; i < this.cantPreguntas; i++) {
                     console.log("preguntaCate tineeeeee", this.preguntaCate, "y su largooo essss", this.preguntaCate.length);
                     if (this.preguntaCate[i] != null && this.preguntaCate2.length == 0) {
@@ -296,7 +301,7 @@ empresa: null,
                             pregunta: this.preguntaCate[i],
                             opciones: this.opciones,
                             escala: null
-                        }
+                        };
                         preguntass.push(variable)
                     }
                     else if(this.preguntaCate2[i] != null && this.preguntaCate.length == 0){
@@ -306,21 +311,21 @@ empresa: null,
                             pregunta: this.preguntaCate[i],
                             opciones: null,
                             escala: this.escalas
-                        }
+                        };
                         preguntass.push(variable)
                     }
                     else{
                         console.log("No se puede añadir esta categoría")
                     }
                 }
-                console.log("quiero añadir", preguntass)
+                console.log("quiero añadir", preguntass);
 
                 this.json = {
                     ID: 19,
                     nombre: this.nombreCategoria,
                     descripcion: this.description,
                     preguntas: preguntass
-                }
+                };
 
 
                 console.log("jsooooooooooooon", this.json)
@@ -373,47 +378,48 @@ empresa: null,
         margin-top: 5px;
         display: inline-block;
         vertical-align: top;
-    }
+}
 
-    .md-content {
-        width: 100px;
-        height: 200px;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-    }
-    /* Color del cuadrado primary */
-    .md-content.md-theme-default.md-primary {
-        background-color: #ffbe33;
-        color: #5d5d5d;
-        font-size: 17px;
-    @import url('https://fonts.googleapis.com/css?family=Francois+One');
-        font-family: 'Francois One', sans-serif;
-    }
-    /* Color del cuadrado accent*/
-    .md-content.md-theme-default.md-accent {
-        background-color: #ff8b09;
-        color: #474747;
-        font-size: 17px;
-    @import url('https://fonts.googleapis.com/css?family=Francois+One');
-        font-family: 'Francois One', sans-serif;
-    }
-    .imagePos{
-        display: inline-flex;
-        justify-content: right;
-        /*    align-items: right; */
-        float: right;
-    }
+.md-content {
+    width: 100px;
+    height: 200px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Color del cuadrado primary */
+.md-content.md-theme-default.md-primary {
+    background-color: #ffbe33;
+    color: #5d5d5d;
+    font-size: 17px;
+@import url('https://fonts.googleapis.com/css?family=Francois+One');
+    font-family: 'Francois One', sans-serif;
+}
+/* Color del cuadrado accent*/
+.md-content.md-theme-default.md-accent {
+    background-color: #ff8b09;
+    color: #474747;
+    font-size: 17px;
+@import url('https://fonts.googleapis.com/css?family=Francois+One');
+    font-family: 'Francois One', sans-serif;
+}
+.imagePos{
+    display: inline-flex;
+    justify-content: right;
+    /*    align-items: right; */
+    float: right;
+}
 
-    .font1{
-        color: black;
-        font-size: medium;
-        font-weight: normal;
-        font-style: oblique;
-    }
+.font1{
+    color: black;
+    font-size: medium;
+    font-weight: normal;
+    font-style: oblique;
+}
 
-    .font2{
-        color: grey;
-        font-size: large;
-    }
+.font2{
+    color: grey;
+    font-size: large;
+}
+
 </style>

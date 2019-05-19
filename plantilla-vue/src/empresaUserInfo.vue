@@ -65,7 +65,17 @@
 
 <script>
     export default {
-        name: "empresaUserInfo.vue"
+        name: "empresaUserInfo.vue",
+        data: () => ({
+
+
+        }),
+        created(){
+
+
+        }
+
+
     }
 </script>
 

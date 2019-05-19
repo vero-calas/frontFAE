@@ -38,6 +38,10 @@ isa_info, .isa_success, .isa_warning, .isa_error {
 }
 
 
+margenCard{
+  margin: inherit
+}
+
 html {
   height: 100%;
   box-sizing: border-box;

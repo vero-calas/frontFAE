@@ -11,6 +11,7 @@ Vue.use(VueResource);
 import VueCarousel from 'vue-carousel';
 Vue.use(VueCarousel);
 import App from './App.vue';
+import home from'./home.vue';
 import firebase from 'firebase';
 Vue.http.options.emulateJSON = true
 var config = {
@@ -25,7 +26,7 @@ firebase.initializeApp(config);
 
 
 const routes = [
-    {}
+    { path: '/home', component: home}
 ]
 
 // Create the router instance and pass the `routes` option

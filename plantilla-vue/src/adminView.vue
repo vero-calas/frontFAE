@@ -287,73 +287,7 @@
 
             <md-tab id="tab-estudio" md-label="Enviar estudio" to="/components/tabs/estudio">
 
-                <md-card style="width:98%">
-                    <div class="demo-badge">
-                        <div>
-                            <md-badge md-content="1" md-dense>
 
-                                <md-menu md-align-trigger>
-                                    <md-button class="md-icon-button" md-menu-trigger>
-                                        <md-icon>notifications</md-icon>
-                                    </md-button>
-
-                                    <md-menu-content>
-                                        <md-menu-item>Notificacion 1</md-menu-item>
-                                        <md-menu-item>Notificacion 2</md-menu-item>
-                                        <md-menu-item>Notificacion 3</md-menu-item>
-                                    </md-menu-content>
-                                </md-menu>
-
-                            </md-badge>
-
-                            <md-badge class="md-primary" md-content="12" md-dense>
-
-                                <md-menu md-align-trigger>
-                                    <md-button class="md-icon-button" md-menu-trigger>
-                                        <md-icon>home</md-icon>
-                                    </md-button>
-                                    <md-menu-content>
-                                        <md-menu-item>Notificacion 1</md-menu-item>
-                                        <md-menu-item>Notificacion 2</md-menu-item>
-                                        <md-menu-item>Notificacion 3</md-menu-item>
-                                    </md-menu-content>
-                                </md-menu>
-                            </md-badge>
-
-                            <br> <H1> Para enviar diagnóstico despliegue esta ventana </H1>
-                        </div>
-                    </div>
-
-
-                    <md-card-expand>
-                        <md-card-expand-content>
-<!--
-                            <md-card-content>
-                                <label>Elija la empresa que desea buscar:</label>
-                                <md-autocomplete v-model="selectedEmpresas" :md-options="empresas">
-                                    <label>Empresas</label>
-                                </md-autocomplete>
-                                <label>Ingrese archivo de diagnóstico: </label>
-                                <md-field>
-                                    <label>Archivo subido:</label>
-                                    <md-file v-model="placeholder" placeholder="Haga clic y seleccione el archivo que desea enviar" />
-                                </md-field>
-                                <md-button class="md-raised">Enviar</md-button>
-                            </md-card-content>
--->
-                        </md-card-expand-content>
-
-                        <md-card-actions md-alignment="space-between">
-                            <md-card-expand-trigger>
-                                <md-button class="md-icon-button">
-                                    <md-icon>keyboard_arrow_down</md-icon>
-                                </md-button>
-                            </md-card-expand-trigger>
-                        </md-card-actions>
-
-                    </md-card-expand>
-
-                </md-card>
 
             </md-tab>
 

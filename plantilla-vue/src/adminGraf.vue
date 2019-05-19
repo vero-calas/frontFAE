@@ -254,11 +254,11 @@
                     let fechaServFinal =  fechaFinSplit[3] + "-" + this.cambiarMes(fechaFinSplit[1]) + "-" + fechaFinSplit[2] + "T23:59:59.000+0000";
                     console.log("la fecha queda configurada como:", fechaServFinal);
                     let json = {
-                        "categoria_id": this.categoria,
-                        "tipoEncuesta": this.tipoDeEncuesta,
-                        "region_id": this.region,
-                        "fechaInicial": fechaInicioServFinal,
-                        "fechaFinal": fechaServFinal
+                        categoria_id: this.categoria,
+                        tipoEncuesta: this.tipoDeEncuesta,
+                        region_id: this.region,
+                        fechaInicial: fechaInicioServFinal,
+                        fechaFinal: fechaServFinal
                     };
 
                     //servicio de envio del json
@@ -266,7 +266,7 @@
                     const auth = {
                         headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiJDJhJDEwJGtsblN6Tm9oNHF5M1RQOS9scXhCN3VpdmdQeG9XTVZNZ2F0eVIwb0taVC4vRnl2Qi42S0RLIiwicm9sIjoxLCJjb3JyZW8iOiJhZG1pbkBtYWlsLmNsIiwiYWN0aXZvIjp0cnVlfQ.g78PzR0At1xVkHqXYPIVJmHWmF8YHmtQu6nXG8AoEnU'}
                     };
-                    this.$http.post('http://localhost:8092/encuestados/graphics', JSON.stringify(json), auth).then(response => {
+                    this.$http.post('http://134.209.49.245:8080/mongodb-v1/encuestados/graphics', JSON.stringify(json), auth).then(response => {
                         this.dataGr = response.data;
                         console.log('data de grafico obtenido es:', this.dataGr);
                         this.grafico(this.dataGr)
@@ -286,12 +286,12 @@
                     let fechaServFinal =  fechaFinSplit[3] + "-" + this.cambiarMes(fechaFinSplit[1]) + "-" + fechaFinSplit[2] + "T23:59:59.000+0000";
 
                     let json2 = {
-                        "categoria_id": this.categoria,
-                        "tipoEncuesta": this.tipoDeEncuesta,
-                        "region_id": this.region,
-                        "variableSD": this.variableSD,
-                        "fechaInicial": fechaInicioServFinal,
-                        "fechaFinal": fechaServFinal
+                        categoria_id: this.categoria,
+                        tipoEncuesta: this.tipoDeEncuesta,
+                        region_id: this.region,
+                        variableSD: this.variableSD,
+                        fechaInicial: fechaInicioServFinal,
+                        fechaFinal: fechaServFinal
                     };
 
                     //servicio para SD
@@ -299,7 +299,7 @@
                     const auth = {
                         headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiJDJhJDEwJGtsblN6Tm9oNHF5M1RQOS9scXhCN3VpdmdQeG9XTVZNZ2F0eVIwb0taVC4vRnl2Qi42S0RLIiwicm9sIjoxLCJjb3JyZW8iOiJhZG1pbkBtYWlsLmNsIiwiYWN0aXZvIjp0cnVlfQ.g78PzR0At1xVkHqXYPIVJmHWmF8YHmtQu6nXG8AoEnU'}
                     };
-                    this.$http.post('http://localhost:8092/encuestados/graphicsSD', JSON.stringify(json2), auth).then(response => {
+                    this.$http.post('http://134.209.49.245:8080/mongodb-v1/encuestados/graphicsSD', JSON.stringify(json2), auth).then(response => {
                         this.dataGrSD = response.data;
                         console.log('data de graficoSD obtenido es:', this.dataGr);
                         this.graficoBar(this.dataGrSD);
@@ -311,15 +311,16 @@
                // this.crearGrafico();
             },
 
-            grafico(dataServicio){
+            grafico(){
                 console.log("dataGR vale", this.dataGr)
-                if (dataServicio != null) {
+                if (this.dataGr != null) {
                     console.log("entre")
+                    console.log("los valores son:", this.dataGr.Aprobados, this.dataGr.Rechazados , this.dataGr.Neutro)
                     this.pieData = {
                         labels: ["Aprobados", "Desaprobados", "Neutro"],
                         datasets: [
                             {
-                                data: [dataServicio.Aprobados, dataServicio.Rechazados , dataServicio.Neutro],
+                                data: [this.dataGr.Aprobados, this.dataGr.Rechazados , this.dataGr.Neutro],
                                 label: ["Puntuación alcanzada"],
                                 backgroundColor: [
                                     '#D4E157',
@@ -342,28 +343,40 @@
 
             graficoBar(barServicio){
                 console.log("dataGrSD vale", this.dataGrSD)
-                if (barServicio != null) {
+                if (this.dataGrSD != null) {
                     console.log("entre")
                     this.barData = {
-                        labels: ["Aprobados", "Desaprobados", "Neutro"],
-                        datasets: []
+                        labels: [],
+                        datasets: [
+                            {
+                                label: "Aprobados",
+                                backgroundColor: "#D4E157",
+                                data: []
+                            },
+                            {
+                                label: "Desaprobados",
+                                backgroundColor: '#e15545',
+                                data: []
+                            },
+                            {
+                                label: "Neutros",
+                                backgroundColor: '#fbe246',
+                                data: []
+                            },
+                        ]
                     };
-                    let datasetAux = {
-                            data: [barServicio.Aprobados, barServicio.Rechazados , barServicio.Neutro],
-                            label: [],
-                            backgroundColor: [
-                                '#D4E157',
-                                '#e15545',
-                                '#fbe246'
-                            ],
-                        };
-                    console.log("el largo de barservicio es", barServicio.length)
-                    console.log("barServicioooooo", barServicio)
-                    console.log("barservicio[i]", barServicio[0])
-                    for (let i=0; i<barServicio.length; i++){
-                        console.log("el label ", barServicio[i])
-                        this.barData.datasets.push(datasetAux)
-                        this.barData.datasets[i].label.push(barServicio[i]) //label de variable sd
+
+
+                    for (let i=0; i<this.dataGrSD.length; i++){
+                        //aprobados
+                        this.barData.datasets[0].data.push(this.dataGrSD[i].Aprobados);
+                        //desaprobados
+                        this.barData.datasets[1].data.push(this.dataGrSD[i].Rechazados);
+                        //neutros
+                        this.barData.datasets[2].data.push(this.dataGrSD[i].Neutro);
+
+                        this.barData.labels.push(this.dataGrSD[i].Nombre); //label de variable sd
+                        console.log("la data de cada uno vale", "en el numero", i, "los datos", this.dataGrSD[i].Aprobados, this.dataGrSD[i].Rechazados , this.dataGrSD[i].Neutro)
                     }
                     this.showdBar = true
                 }

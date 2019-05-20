@@ -250,8 +250,6 @@
                             </li>
                         </md-select>
                     </md-field>
-                <br>
-                <br>
                 <hr>
                 <div>
                     <label>Modifique el nombre de la categoria:</label>

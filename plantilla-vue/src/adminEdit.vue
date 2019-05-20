@@ -243,10 +243,13 @@
                 <md-card-media style="margin: inherit">
                 <br>
                 <label>Seleccione la categoría que desea editar:</label>
-                <select>
-                    <option v-for="(elemento, i) in dataPreguntas">
-                        {{elemento.nombre}}</option>
-                </select>
+                    <md-field>
+                        <md-select v-model="idCategoriaEdicion">
+                            <li v-for="(categoria, i ) in dataPreguntas">
+                                <md-option :value=i+1> {{categoria.nombre}} </md-option>
+                            </li>
+                        </md-select>
+                    </md-field>
                 <br>
                 <br>
                 <hr>
@@ -263,6 +266,13 @@
                         <md-textarea v-model="nuevaDescripcion" md-autogrow></md-textarea>
                     </md-field>
                 </div>
+                    <div v-if="update">
+                        <div class="isa_success">
+                            <i class="fa fa-check"></i>
+                            La categoría ha sido modificada exitosamente
+                        </div>
+                    </div>
+                    <md-button class="md-raised" v-on:click="actualizarCategoria">Actualizar</md-button>
                 </md-card-media>
             </md-card>
 
@@ -284,6 +294,12 @@
 
             idCategoria: null,
             eliminada: false,
+
+            idCategoriaEdicion: null,
+            nuevoNombre: null,
+            nuevaDescripcion:null,
+            update: false,
+
 
             /*Data del bind*/
             dataUsuarios: null,
@@ -433,6 +449,24 @@
                 });
             },
 
+            actualizarCategoria(){
+                let roleAdmin ={
+                    headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiYXNkZiIsInJvbCI6MSwiY29ycmVvIjoiYWRtaW5AbWFpbC5jbCIsImFjdGl2byI6dHJ1ZX0.TrVdJeaJ5km92RKv2hI0yot8gWwtON3azO1qPvfdjZ0'}
+                };
+                let json = {
+                    nombre: this.nuevoNombre,
+                    descripicion: this.nuevaDescripcion
+                };
+
+                this.$http.put('http://134.209.49.245:8080/mongodb-v1/categories/updateCategoria/' + this.idCategoriaEdicion, JSON.stringify(json), roleAdmin).then(response => {
+                    this.update = true;
+                    console.log('categoria actualizada');
+                }, (response) => {
+                    console.log('no actualiza categoria');
+                });
+
+        },
+
             buscarPorNom(){
 
                 for (let i=0; i<this.dataUsuarios.length; i++){
@@ -452,6 +486,8 @@
                 }
 
             }
+
+
         }
     }
 </script>

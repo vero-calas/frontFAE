@@ -178,7 +178,7 @@
                         <div v-if="opcionCategoria == 2">
                             <label>Cantidad de preguntas:</label>
                             <md-field>
-                                <md-select name="cantPreguntas" id="cantPreguntas" v-model="cantPreguntas">
+                                <md-select name="cantPreguntas" id="cantPreguntas" v-model="cantPreguntasOpciones">
                                     <md-option value="1">1</md-option>
                                     <md-option value="12">2</md-option>
                                     <md-option value="123">3</md-option>
@@ -187,21 +187,21 @@
                                 </md-select>
                             </md-field>
                             <hr>
-                            {{this.cantPreguntas}} cantidadad preguntas
-                            <div v-for="i in this.cantPreguntas" >
+                            <div v-for="i in this.cantPreguntasOpciones" >
                                 <br>
                                 <label>Pregunta {{i}}:</label>
                                 <md-field>
                                     <label>Ingrese la pregunta que desea realizar</label>
-                                    <md-textarea :id=i v-model="preguntaCate[i]" md-autogrow></md-textarea>
+                                    <md-textarea :id=i v-model="preguntaOpciones[i]" md-autogrow></md-textarea>
                                 </md-field>
-                                {{preguntaCate}}
                                 <br>
+                                {{preguntaOpciones}}
                                 <label>Escala:</label>
                                 <md-field>
                                     <label>Ingrese la escala con que desea evaluar la pregunta</label>
                                     <md-textarea :id=i v-model="opciones[i]" md-autogrow></md-textarea>
                                 </md-field>
+                                {{opciones}}
                                 <hr>
                             </div>
                         </div>
@@ -219,13 +219,22 @@
                     <div class="md-title"> Categorías: </div>
                 </md-card-header>
                 <md-card-media style="margin: inherit;">
-                <div v-for="categoria in dataPreguntas">
-                    <label>-Numeración de la categoría: {{categoria.ID}}<br>
-                        -Nombre de la categoría: {{categoria.nombre}}<br>
-                        <md-button :value=categoria.ID class="md-raised md-accent">Eliminar</md-button> </label>
-                    <hr>
-                </div>
+                    <md-field>
+                    <md-select v-model="idCategoria">
+                        <li v-for="(categoria, i ) in dataPreguntas">
+                        <md-option :value=i+1> {{categoria.nombre}} </md-option>
+                        </li>
+                    </md-select>
+                    </md-field>
+                    <br>
+                    <md-button v-on:click="eliminarCategoria" class="md-raised md-accent">Eliminar</md-button>
                 </md-card-media>
+                <div v-if="eliminada">
+                    <div class="isa_success">
+                        <i class="fa fa-check"></i>
+                        La empresa ha sido añadida exitosamente
+                    </div>
+                </div>
             </md-card>
             <md-card style="width: 68%; float: right">
                 <md-card-header>
@@ -235,7 +244,7 @@
                 <br>
                 <label>Seleccione la categoría que desea editar:</label>
                 <select>
-                    <option  v-for="(elemento, i) in dataPreguntas">
+                    <option v-for="(elemento, i) in dataPreguntas">
                         {{elemento.nombre}}</option>
                 </select>
                 <br>
@@ -273,6 +282,9 @@
 
         data: () => ({
 
+            idCategoria: null,
+            eliminada: false,
+
             /*Data del bind*/
             dataUsuarios: null,
             dataPreguntas: null,
@@ -297,9 +309,12 @@
             preguntasEscala: [], //arreglo con todas las preguntas la primera es nula
             listaEscala:[], //lista con los elemementos de la escala
 
-            opciones: [],
-            cantPreguntas2: null,
-            preguntaCate: [],
+            opciones: [], //lista de opciones
+            cantPreguntasOpciones: null, //maximo de opciones
+            preguntaOpciones: [], // arreglo con todas las preguntas
+
+
+
             opcionCategoria: null
                      }),
 
@@ -368,12 +383,55 @@
                     });
                 }
                 else if (this.opcionCategoria == 2){
+                    for (let i=1; i<=this.escalas; i++){
+                        this.listaEscala.push(i)
+                    }//lista de escala completa
 
+                    let jsonCategoria ={
+                        ID: this.dataPreguntas[this.dataPreguntas.length - 1].ID + 1,
+                        nombre: this.nombreCategoria,
+                        descripcion: this.description,
+                        preguntas: []
+                    };
+
+                    for (let j=1; j<=this.cantPreguntasEscala.length; j++) {
+                        if (this.preguntasEscala[j] == null) {
+                            console.log("es nulo")
+                        }
+                        else {
+                            let variable = {
+                                idpregunta: j,
+                                pregunta: this.preguntasEscala[j],
+                                escala: this.listaEscala
+                            };
+                            console.log("el json que pondre es", variable)
+                            jsonCategoria.preguntas.push(variable)
+                        }
+                    }
+
+                    let roleAdmin ={
+                        headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiYXNkZiIsInJvbCI6MSwiY29ycmVvIjoiYWRtaW5AbWFpbC5jbCIsImFjdGl2byI6dHJ1ZX0.TrVdJeaJ5km92RKv2hI0yot8gWwtON3azO1qPvfdjZ0'}
+                    };
+                    this.$http.post('http://134.209.49.245:8080/mongodb-v1/categories/', JSON.stringify(jsonCategoria) , roleAdmin).then((response) => {
+                        console.log("Hice el post de", jsonCategoria)
+                    }, (response) => {
+                        console.log("Fallo servicio")
+                    });
                 }
 
             },
 
-
+            eliminarCategoria(){
+                let roleAdmin ={
+                    headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiYXNkZiIsInJvbCI6MSwiY29ycmVvIjoiYWRtaW5AbWFpbC5jbCIsImFjdGl2byI6dHJ1ZX0.TrVdJeaJ5km92RKv2hI0yot8gWwtON3azO1qPvfdjZ0'}
+                };
+                this.$http.delete('http://134.209.49.245:8080/mongodb-v1/categories/deleteCategoria/' + this.idCategoria, roleAdmin).then(response => {
+                    this.eliminada = true;
+                    console.log('categoria eliminada');
+                }, (response) => {
+                    console.log('no elimina categoria');
+                });
+            },
 
             buscarPorNom(){
 

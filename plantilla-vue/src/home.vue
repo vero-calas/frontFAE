@@ -1007,7 +1007,7 @@
                 nivelDeEstudio: null,
                 situacionLaboral: null,
                 nivelDeIngreso: null,
-                genero: null,
+                sexo: null,
                 estadoCivil: null,
                 rangoDeEdad: null,
                 fecha: null,

@@ -36,7 +36,7 @@
                     <a v-on:click="setSelectedItemHome" href="#" class="list-group-item"><label class="labelSide">Home</label><md-icon class="position">home</md-icon></a>
                     <a v-on:click="setSelectedItemAdminView" href="#" class="list-group-item"><label class="labelSide">Estadísticas generales</label><md-icon class="position">local_play</md-icon></a>
                     <a v-on:click="setSelectedItemAdminEdit" href="#" class="list-group-item"><label class="labelSide">Editar encuesta</label><md-icon class="position">local_play</md-icon></a>
-                   <a v-on:click="setSelectedItemEmpresaInfo" href="#" class="list-group-item"><label class="labelSide">Mi perfil</label><md-icon class="position">local_play</md-icon></a>
+                   <a v-on:click="setSelectedItemAdminInfo" href="#" class="list-group-item"><label class="labelSide">Mi perfil</label><md-icon class="position">local_play</md-icon></a>
                 </div>
             </md-app-drawer>
 
@@ -62,6 +62,9 @@
                     </div>
                     <div v-if="this.eleccion == 7">
                         <empresa-userInfo-component></empresa-userInfo-component>
+                    </div>
+                    <div v-if="this.eleccion == 8">
+                        <admin-userInfo-component v-bind:datos="usuarios"></admin-userInfo-component>
                     </div>
                 </div>
             </md-app-content>
@@ -99,7 +102,8 @@
     import empresaInfo from './empresaUserInfo.vue';
     import adminEdit2 from './adminEdit2.vue';
     import adminView2 from './adminView2.vue';
-    import adminGraf from './adminGraf.vue'
+    import adminGraf from './adminGraf.vue';
+    import adminUserInfo from './adminUserInfo.vue';
     import {
         required,
         email
@@ -117,7 +121,8 @@
             'admin-edit-component': adminEdit,
             'admin-edit2-component': adminEdit2,
             'empresa-component': empresaView,
-            'empresa-userInfo-component': empresaInfo
+            'empresa-userInfo-component': empresaInfo,
+            'admin-userInfo-component': adminUserInfo
         },
         name: 'Overlap',
         data: () => ({
@@ -235,6 +240,9 @@
             },
             setSelectedItemEmpresaInfo(){
                 this.eleccion=7;
+            },
+            setSelectedItemAdminInfo(){
+              this.eleccion=8;
             },
             servicioLogin(){
                 const config = {

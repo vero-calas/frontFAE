@@ -33,7 +33,7 @@
                     </div>
 
                 </div>
-            </md-tab> 
+            </md-tab>
 
 
         <md-tab id="tab-posts" md-label="Estadísticas por Empresa" to="/components/tabs/posts">
@@ -137,9 +137,45 @@
                         </md-field>
                         <br>
                         <hr>
-                        <md-checkbox v-model="booleanEscala">Crear preguntas por escala</md-checkbox>
-                        <md-checkbox v-model="booleanOpciones">Crear preguntas con opciones</md-checkbox>
-                        <div v-if="booleanOpciones">
+                        <md-checkbox v-model="opcionCategoria" value="1">Crear preguntas por escala</md-checkbox>
+                        <md-checkbox v-model="opcionCategoria" value="2">Crear preguntas con opciones</md-checkbox>
+                        <!-- escalas -->
+                        <div v-if="opcionCategoria == 1">
+                            <label>Cantidad de preguntas:</label>
+                            <md-field>
+                                <md-select name="cantPreguntas" id="cantPreguntas" v-model="cantPreguntasEscala">
+                                    <md-option value="1">1</md-option>
+                                    <md-option value="12">2</md-option>
+                                    <md-option value="123">3</md-option>
+                                    <md-option value="1234">4</md-option>
+                                    <md-option value="12345">5</md-option>
+                                </md-select>
+                            </md-field>
+                            <hr>
+                            <div v-for="i in this.cantPreguntasEscala" >
+                                <br>
+                                <label>Pregunta {{i}}:</label>
+                                <md-field>
+                                    <label>Ingrese la pregunta que desea realizar</label>
+                                    <md-textarea :id=i v-model="preguntasEscala[i]" md-autogrow></md-textarea>
+                                </md-field>
+                                {{preguntasEscala}}
+                                <br>
+                                <label>Escala:</label>
+                                <md-field>
+                                    <md-radio v-model="escalas" value="1"><label>1</label></md-radio>
+                                    <md-radio v-model="escalas" value="2"><label>2</label></md-radio>
+                                    <md-radio v-model="escalas" value="3"><label>3</label></md-radio>
+                                    <md-radio v-model="escalas" value="4"><label>4</label></md-radio>
+                                    <md-radio v-model="escalas" value="5"><label>5</label></md-radio>
+                                    <md-radio v-model="escalas" value="6"><label>6</label></md-radio>
+                                    <md-radio v-model="escalas" value="7"><label>7</label></md-radio>
+                                </md-field>
+                            </div>
+                        </div>
+
+                        <!-- opciones -->
+                        <div v-if="opcionCategoria == 2">
                             <label>Cantidad de preguntas:</label>
                             <md-field>
                                 <md-select name="cantPreguntas" id="cantPreguntas" v-model="cantPreguntas">
@@ -151,6 +187,7 @@
                                 </md-select>
                             </md-field>
                             <hr>
+                            {{this.cantPreguntas}} cantidadad preguntas
                             <div v-for="i in this.cantPreguntas" >
                                 <br>
                                 <label>Pregunta {{i}}:</label>
@@ -165,46 +202,7 @@
                                     <label>Ingrese la escala con que desea evaluar la pregunta</label>
                                     <md-textarea :id=i v-model="opciones[i]" md-autogrow></md-textarea>
                                 </md-field>
-                                {{opciones}}
-
                                 <hr>
-                                {{this.preguntass}}
-                            </div>
-                        </div>
-                        <div v-if="booleanEscala && booleanOpciones==false">
-                            <label>Cantidad de preguntas:</label>
-                            <md-field>
-                                <md-select name="cantPreguntas" id="cantPreguntas" v-model="cantPreguntas2">
-                                    <md-option value="1">1</md-option>
-                                    <md-option value="12">2</md-option>
-                                    <md-option value="123">3</md-option>
-                                    <md-option value="1234">4</md-option>
-                                    <md-option value="12345">5</md-option>
-                                </md-select>
-                            </md-field>
-                            <hr>
-                            <div v-for="i in this.cantPreguntas2" >
-
-                                <br>
-                                <label>Pregunta {{i}}:</label>
-                                <md-field>
-                                    <label>Ingrese la pregunta que desea realizar</label>
-                                    <md-textarea :id=i v-model="preguntaCate2[i]" md-autogrow></md-textarea>
-                                </md-field>
-                                {{preguntaCate2}}
-                                <br>
-                                <label>Escala:</label>
-                                <md-field>
-                                    <md-radio v-model="escalas" value="1"><label>1</label></md-radio>
-                                    <md-radio v-model="escalas" value="2"><label>2</label></md-radio>
-                                    <md-radio v-model="escalas" value="3"><label>3</label></md-radio>
-                                    <md-radio v-model="escalas" value="4"><label>4</label></md-radio>
-                                    <md-radio v-model="escalas" value="5"><label>5</label></md-radio>
-                                    <md-radio v-model="escalas" value="6"><label>6</label></md-radio>
-                                    <md-radio v-model="escalas" value="7"><label>7</label></md-radio>
-                                </md-field>
-                                {{escalas}}
-                                {{this.preguntass}}
                             </div>
                         </div>
 
@@ -224,7 +222,7 @@
                 <div v-for="categoria in dataPreguntas">
                     <label>-Numeración de la categoría: {{categoria.ID}}<br>
                         -Nombre de la categoría: {{categoria.nombre}}<br>
-                        <md-button  class="md-raised md-accent">Eliminar</md-button> </label>
+                        <md-button :value=categoria.ID class="md-raised md-accent">Eliminar</md-button> </label>
                     <hr>
                 </div>
                 </md-card-media>
@@ -280,7 +278,7 @@
             dataPreguntas: null,
 
 
-empresa: null,
+            empresa: null,
             submitted: false,
             errorsub: null,
 
@@ -293,21 +291,25 @@ empresa: null,
             /* variables para armar json */
             nombreCategoria: null,
             description: null,
-            escalas: [],
+
+            cantPreguntasEscala: null, //cantidad de preguntas de escala
+            escalas: null, //numero maximo de escala
+            preguntasEscala: [], //arreglo con todas las preguntas la primera es nula
+            listaEscala:[], //lista con los elemementos de la escala
+
             opciones: [],
-            cantPreguntas: null,
             cantPreguntas2: null,
             preguntaCate: [],
-            preguntaCate2: [],
-            booleanEscala: false,
-            booleanOpciones: false,
+            opcionCategoria: null
                      }),
 
         created() {
+
             this.dataUsuarios = this.datos[0];
             this.dataPreguntas = this.datos[1];
             this.buscarPorNom();
             this.buscarPorCorr();
+
 
         },
         methods : {
@@ -328,53 +330,47 @@ empresa: null,
             },
 
             crearJSON() {
-                let preguntass = [];
-                console.log("cantidad de preguntas", this.cantPreguntas);
-                for (let i = 0; i < this.cantPreguntas; i++) {
-                    console.log("preguntaCate tineeeeee", this.preguntaCate, "y su largooo essss", this.preguntaCate.length);
-                    if (this.preguntaCate[i] != null && this.preguntaCate2.length == 0) {
-                        //preguntaCate2 son escalas
-                        console.log("entro a este if");
-                        var variable = {
-                            idpregunta: i,
-                            pregunta: this.preguntaCate[i],
-                            opciones: this.opciones,
-                            escala: null
-                        };
-                        preguntass.push(variable)
-                    }
-                    else if(this.preguntaCate2[i] != null && this.preguntaCate.length == 0){
-                        console.log("entro a este else if");
-                        var variable = {
-                            idpregunta: i,
-                            pregunta: this.preguntaCate[i],
-                            opciones: null,
-                            escala: this.escalas
-                        };
-                        preguntass.push(variable)
-                    }
-                    else{
-                        console.log("No se puede añadir esta categoría")
-                    }
-                }
-                console.log("quiero añadir", preguntass);
 
-                this.json = {
-                    ID: 19,
+                if (this.opcionCategoria == 1){
+                for (let i=1; i<=this.escalas; i++){
+                    this.listaEscala.push(i)
+                }//lista de escala completa
+
+                let jsonCategoria ={
+                    ID: this.dataPreguntas[this.dataPreguntas.length - 1].ID + 1,
                     nombre: this.nombreCategoria,
                     descripcion: this.description,
-                    preguntas: preguntass
+                    preguntas: []
                 };
 
+                for (let j=1; j<=this.cantPreguntasEscala.length; j++) {
+                    if (this.preguntasEscala[j] == null) {
+                        console.log("es nulo")
+                    }
+                    else {
+                        let variable = {
+                            idpregunta: j,
+                            pregunta: this.preguntasEscala[j],
+                            escala: this.listaEscala
+                        };
+                        console.log("el json que pondre es", variable)
+                        jsonCategoria.preguntas.push(variable)
+                    }
+                }
 
-                console.log("jsooooooooooooon", this.json)
-/*
-                this.$http.post('http://localhost:8092/categories/', this.json).then((response) => {
-                    console.log("Hice el post")
-                }, (response) => {
-                    console.log("Fallo servicio")
-                });
-                */
+                    let roleAdmin ={
+                        headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiYXNkZiIsInJvbCI6MSwiY29ycmVvIjoiYWRtaW5AbWFpbC5jbCIsImFjdGl2byI6dHJ1ZX0.TrVdJeaJ5km92RKv2hI0yot8gWwtON3azO1qPvfdjZ0'}
+                    };
+                    this.$http.post('http://134.209.49.245:8080/mongodb-v1/categories/', JSON.stringify(jsonCategoria) , roleAdmin).then((response) => {
+                        console.log("Hice el post de", jsonCategoria)
+                    }, (response) => {
+                        console.log("Fallo servicio")
+                    });
+                }
+                else if (this.opcionCategoria == 2){
+
+                }
+
             },
 
 

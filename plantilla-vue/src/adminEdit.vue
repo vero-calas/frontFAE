@@ -4,14 +4,37 @@
 
         <md-tabs md-sync-route class="md-transparent" md-alignment="fixed">
             <md-tab id="tab-home" md-label="Editar encuestas" to="/components/tabs/home">
-<md-card>
-    <label>Escriba el nombre de la empresa de Marketing que desea encuestar:</label>
-    <md-field v-model="empresa"></md-field>
+                <div>
 
-    <md-button>Guardar</md-button>
 
-</md-card>
-            </md-tab>
+                <md-card>
+                    <md-card-header class="md-title">A continuación modifique el nombre de la empresa sobre la que desea encuestar:</md-card-header>
+                    <md-card-media style="margin: inherit">
+                        <md-field>
+                            <label>Ingrese el nombre aquí:</label>
+                            <md-textarea v-model="empresa" md-autogrow></md-textarea>
+                        </md-field>
+                        <md-button v-on:click="modificarEmpresa">Guardar</md-button>
+                    </md-card-media>
+                </md-card>
+
+                    <div v-if="submitted">
+                        <div class="isa_success">
+                            <i class="fa fa-check"></i>
+                            La empresa ha sido añadida exitosamente
+                        </div>
+                    </div>
+
+                    <div v-if="errorsub">
+                        <div class="isa_error">
+                            <i class="fa fa-times"></i>
+                            No se pudo añadir la empresa, pruebe recargando la página.
+                        </div>
+                    </div>
+
+                </div>
+            </md-tab> 
+
 
         <md-tab id="tab-posts" md-label="Estadísticas por Empresa" to="/components/tabs/posts">
             <div>
@@ -49,7 +72,6 @@
                     <md-card-header>
                         <div class="md-title"> Busca un usuario específico: </div>
                     </md-card-header>
-
                     <md-card-media style="margin: inherit">
                         <label>Buscar por el nombre:</label>
                         <br>
@@ -259,6 +281,8 @@
 
 
 empresa: null,
+            submitted: false,
+            errorsub: null,
 
                          buscarCorr: null,
                          buscarNom: null,
@@ -287,6 +311,21 @@ empresa: null,
 
         },
         methods : {
+
+            modificarEmpresa(){
+
+                let roleAdmin ={
+                    headers: {'Authorization':'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb250cmFzZW5hIjoiYXNkZiIsInJvbCI6MSwiY29ycmVvIjoiYWRtaW5AbWFpbC5jbCIsImFjdGl2byI6dHJ1ZX0.TrVdJeaJ5km92RKv2hI0yot8gWwtON3azO1qPvfdjZ0'}
+                };
+
+                this.$http.put('http://134.209.49.245:8080/mongodb-v1/categories/updateEmpresa/' + this.empresa, this.empresa ,roleAdmin).then((response) => {
+                    console.log("Hice el put de empresa")
+                    this.submitted = true;
+                }, (response) => {
+                    this.error = false;
+                    console.log("Fallo servicio, put de empresa")
+                });
+            },
 
             crearJSON() {
                 let preguntass = [];
